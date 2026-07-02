@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.util.function.Supplier;
 
 public class CacheUtils {
-    private static final Path BASE_CACHE_DIR = FabricLoader.getInstance().getConfigDir().resolve("scalare/.cache");
+    private static final Path BASE_CACHE_DIR = FabricLoader.getInstance().getConfigDir().resolve(VarUtils.getModID() + "/.cache");
     private static final Gson GSON = new GsonBuilder()
             .setPrettyPrinting()
             .serializeNulls()

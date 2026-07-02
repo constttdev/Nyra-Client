@@ -19,7 +19,7 @@ public class FriendUtils {
 
     private static final Path FILE =
             FabricLoader.getInstance().getConfigDir()
-                    .resolve("scalare")
+                    .resolve(VarUtils.getModID())
                     .resolve("friends.cfg");
 
     /** How long to wait for Mojang UUID / name lookups before giving up. */

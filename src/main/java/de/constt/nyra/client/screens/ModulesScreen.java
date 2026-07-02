@@ -5,6 +5,7 @@ import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.SettingImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import imgui.ImGui;
+import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiCond;
 
 public class ModulesScreen extends BaseScreen {
@@ -28,8 +29,20 @@ public class ModulesScreen extends BaseScreen {
                         continue;
                     }
 
+                    boolean enabled = module.isEnabled();
+
+                    if (enabled) {
+                        ImGui.pushStyleColor(ImGuiCol.Button, 0.18f, 0.65f, 0.28f, 1.0f);
+                        ImGui.pushStyleColor(ImGuiCol.ButtonHovered, 0.22f, 0.75f, 0.34f, 1.0f);
+                        ImGui.pushStyleColor(ImGuiCol.ButtonActive, 0.14f, 0.55f, 0.24f, 1.0f);
+                    }
+
                     if (ImGui.button(module.getTranslatableText())) {
                         module.toggle();
+                    }
+
+                    if (enabled) {
+                        ImGui.popStyleColor(3);
                     }
 
                     if (ImGui.isItemClicked(1)) {
@@ -46,19 +59,11 @@ public class ModulesScreen extends BaseScreen {
         if (settingsModule != null) {
             ImGui.setNextWindowSize(300, 400, ImGuiCond.FirstUseEver);
 
-            boolean[] open = {true};
-
             if (ImGui.begin(settingsModule.getTranslatableText() + " Settings")) {
-
                 renderSettings(settingsModule);
-
             }
 
             ImGui.end();
-
-            if (!open[0]) {
-                settingsModule = null;
-            }
         }
     }
 

@@ -29,7 +29,6 @@ public abstract class ModuleImplementation {
         ModuleCacheUtils.saveModule(this);
     }
 
-    // ADD THIS METHOD
     public void renderCustomSettings() {
         // Default: do nothing - override in modules for custom ImGui content
     }
