@@ -1,4 +1,4 @@
 package de.constt.nyra.client.roots.modules.combat;
 
-public class SelfAnvilModule {
+public class KillAuraModule {
 }
