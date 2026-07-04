@@ -4,6 +4,7 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.SettingImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiCond;
@@ -69,6 +70,10 @@ public class ModulesScreen extends BaseScreen {
 
     private void renderSettings(ModuleImplementation module) {
         ImGui.beginChild("Settings");
+
+        ImGui.text(ModuleAnnotationUtils.getDescription(module.getClass()));
+
+        ImGui.separator();
 
         for (SettingImplementation<?> setting : module.getSettings()) {
             setting.renderImGui();

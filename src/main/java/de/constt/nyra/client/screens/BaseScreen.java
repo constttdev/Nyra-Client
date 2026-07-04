@@ -1,5 +1,6 @@
 package de.constt.nyra.client.screens;
 
+import de.constt.nyra.client.utils.ImGuiStyleUtils;
 import foundry.imgui.api.ImGuiMC;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -16,6 +17,7 @@ public class BaseScreen extends Screen {
         try(ImGuiMC.ActiveContext ctx = ImGuiMC.withImGui()) {
             if (ctx != null) {
                 render();
+                ImGuiStyleUtils.applyFluentStyle(1);
             }
         }
         super.extractRenderState(graphics, mouseX, mouseY, a);
