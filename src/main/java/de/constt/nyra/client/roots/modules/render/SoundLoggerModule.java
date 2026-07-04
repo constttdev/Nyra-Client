@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.render;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class SoundLoggerModule {
+
+@ModuleInfoAnnotation(name = "Sound Logger", description = "Enables the Sound Logger module.", category = CategoryImplementation.Categories.RENDER, internalModuleName = "soundlogger")
+public class SoundLoggerModule extends ModuleImplementation {
 }

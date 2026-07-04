@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.render;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class BetterTooltipsModule {
+
+@ModuleInfoAnnotation(name = "Better Tooltips", description = "Improves tooltips.", category = CategoryImplementation.Categories.RENDER, internalModuleName = "bettertooltips")
+public class BetterTooltipsModule extends ModuleImplementation {
 }

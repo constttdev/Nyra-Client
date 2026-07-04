@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.misc;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class AutoNametagModule {
+
+@ModuleInfoAnnotation(name = "Auto Nametag", description = "Automatically handles nametag.", category = CategoryImplementation.Categories.MISC, internalModuleName = "autonametag")
+public class AutoNametagModule extends ModuleImplementation {
 }

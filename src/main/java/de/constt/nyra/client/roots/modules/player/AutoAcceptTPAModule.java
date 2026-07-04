@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.player;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class AutoAcceptTPAModule {
+
+@ModuleInfoAnnotation(name = "Auto Accept TPA", description = "Automatically handles accept TPA.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoaccepttpa")
+public class AutoAcceptTPAModule extends ModuleImplementation {
 }
