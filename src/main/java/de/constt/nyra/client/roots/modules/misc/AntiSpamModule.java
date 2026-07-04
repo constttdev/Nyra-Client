@@ -1,4 +1,10 @@
 package de.constt.nyra.client.roots.modules.misc;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class AntiSpamModule {
+
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+
+@ModuleInfoAnnotation(name = "Anti Spam", description = "Automatically protects against spam.", category = CategoryImplementation.Categories.MISC, internalModuleName = "antispam")
+public class AntiSpamModule extends ModuleImplementation {
 }

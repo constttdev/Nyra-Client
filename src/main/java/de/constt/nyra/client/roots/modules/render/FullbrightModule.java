@@ -7,12 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 
-@ModuleInfoAnnotation(
-        name = "Fullbright",
-        description = "Applies Night Vision while enabled.",
-        category = CategoryImplementation.Categories.RENDER,
-        internalModuleName = "fullbright"
-)
+@ModuleInfoAnnotation(name = "Fullbright", description = "Applies Night Vision while enabled.", category = CategoryImplementation.Categories.RENDER, internalModuleName = "fullbright")
 public class FullbrightModule extends ModuleImplementation {
     @Override
     public void onEnable() {

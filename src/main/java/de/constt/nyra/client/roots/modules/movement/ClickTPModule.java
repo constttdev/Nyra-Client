@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.movement;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class ClickTPModule {
+
+@ModuleInfoAnnotation(name = "Click TP", description = "Enables the Click TP module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "clicktp")
+public class ClickTPModule extends ModuleImplementation {
 }

@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.player;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class AntiHungerModule {
+
+@ModuleInfoAnnotation(name = "Anti Hunger", description = "Automatically protects against hunger.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "antihunger")
+public class AntiHungerModule extends ModuleImplementation {
 }

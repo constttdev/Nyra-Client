@@ -1,4 +1,9 @@
 package de.constt.nyra.client.roots.modules.player;
+import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
-public class AutoMountModule {
+
+@ModuleInfoAnnotation(name = "Auto Mount", description = "Automatically handles mount.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "automount")
+public class AutoMountModule extends ModuleImplementation {
 }
