@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Playtime", description = "Enables the Playtime module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "playtime")
+@ModuleInfoAnnotation(name = "Playtime", description = "Shows you your playtime on screen", category = CategoryImplementation.Categories.MISC, internalModuleName = "playtime")
 public class PlaytimeModule extends ModuleImplementation {
 }

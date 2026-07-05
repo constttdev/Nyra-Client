@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Replenish", description = "Automatically handles replenish.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoreplenish")
+@ModuleInfoAnnotation(name = "Auto Replenish", description = "Places your crops for you upon breaking them", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoreplenish")
 public class AutoReplenishModule extends ModuleImplementation {
 }

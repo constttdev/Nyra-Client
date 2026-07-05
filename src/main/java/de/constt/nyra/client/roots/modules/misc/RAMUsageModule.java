@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "RAM Usage", description = "Enables the RAM Usage module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "ramusage")
+@ModuleInfoAnnotation(name = "RAM Usage", description = "Shows you your RAM usage on screen", category = CategoryImplementation.Categories.MISC, internalModuleName = "ramusage")
 public class RAMUsageModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "CPS Counter", description = "Displays cps counter information on screen.", category = CategoryImplementation.Categories.MISC, internalModuleName = "cpscounter")
+@ModuleInfoAnnotation(name = "CPS Counter", description = "Displays CPS counter information on screen", category = CategoryImplementation.Categories.MISC, internalModuleName = "cpscounter")
 public class CPSCounterModule extends ModuleImplementation {
 }

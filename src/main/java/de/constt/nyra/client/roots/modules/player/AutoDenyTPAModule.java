@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Deny TPA", description = "Automatically handles deny TPA.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autodenytpa")
+@ModuleInfoAnnotation(name = "Auto Deny TPA", description = "Automatically denies TPA requests for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autodenytpa")
 public class AutoDenyTPAModule extends ModuleImplementation {
 }

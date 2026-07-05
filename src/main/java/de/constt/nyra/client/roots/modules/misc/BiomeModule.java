@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Biome", description = "Enables the Biome module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "biome")
+@ModuleInfoAnnotation(name = "Biome", description = "Shows what biome you are in", category = CategoryImplementation.Categories.MISC, internalModuleName = "biome")
 public class BiomeModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Bew", description = "Automatically handles bew.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autobew")
-public class AutoBewModule extends ModuleImplementation {
+@ModuleInfoAnnotation(name = "Auto Brew", description = "Brews potions for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autobrew")
+public class AutoBrewModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Respawn", description = "Automatically handles respawn.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autorespawn")
+@ModuleInfoAnnotation(name = "Auto Respawn", description = "Presses the respawn button for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autorespawn")
 public class AutoRespawnModule extends ModuleImplementation {
 }

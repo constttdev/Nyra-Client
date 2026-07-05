@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Sign", description = "Automatically handles sign.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autosign")
+@ModuleInfoAnnotation(name = "Auto Sign", description = "Places signs for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autosign")
 public class AutoSignModule extends ModuleImplementation {
 }

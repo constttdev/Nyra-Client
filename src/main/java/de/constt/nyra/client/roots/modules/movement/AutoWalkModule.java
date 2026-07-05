@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Walk", description = "Automatically handles walk.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "autowalk")
+@ModuleInfoAnnotation(name = "Auto Walk", description = "Automatically walks for you", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "autowalk")
 public class AutoWalkModule extends ModuleImplementation {
 }

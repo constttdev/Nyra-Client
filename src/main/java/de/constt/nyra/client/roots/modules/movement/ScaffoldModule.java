@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Scaffold", description = "Enables the Scaffold module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "scaffold")
+@ModuleInfoAnnotation(name = "Scaffold", description = "Blocks get placed below you", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "scaffold")
 public class ScaffoldModule extends ModuleImplementation {
 }

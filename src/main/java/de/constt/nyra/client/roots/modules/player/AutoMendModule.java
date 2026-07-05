@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Mend", description = "Automatically handles mend.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "automend")
+@ModuleInfoAnnotation(name = "Auto Mend", description = "Sets the item in your offhand to one that needs mending automatically", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "automend")
 public class AutoMendModule extends ModuleImplementation {
 }

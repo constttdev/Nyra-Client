@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Click TP", description = "Enables the Click TP module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "clicktp")
+@ModuleInfoAnnotation(name = "Click TP", description = "Teleport to the location you click at", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "clicktp")
 public class ClickTPModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "No Rotate", description = "Automatically disables rotate.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "norotate")
+@ModuleInfoAnnotation(name = "No Rotate", description = "Disables rotating", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "norotate")
 public class NoRotateModule extends ModuleImplementation {
 }

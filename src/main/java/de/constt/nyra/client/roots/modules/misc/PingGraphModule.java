@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Ping Graph", description = "Displays ping graph information on screen.", category = CategoryImplementation.Categories.MISC, internalModuleName = "pinggraph")
+@ModuleInfoAnnotation(name = "Ping Graph", description = "Displays your ping graph information on screen", category = CategoryImplementation.Categories.MISC, internalModuleName = "pinggraph")
 public class PingGraphModule extends ModuleImplementation {
 }

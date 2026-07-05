@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Direction Compass", description = "Enables the Direction Compass module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "directioncompass")
+@ModuleInfoAnnotation(name = "Direction Compass", description = "Shows you the direction compass", category = CategoryImplementation.Categories.MISC, internalModuleName = "directioncompass")
 public class DirectionCompassModule extends ModuleImplementation {
 }

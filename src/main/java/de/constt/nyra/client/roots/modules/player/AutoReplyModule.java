@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Reply", description = "Automatically handles reply.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoreply")
+@ModuleInfoAnnotation(name = "Auto Reply", description = "Replies to messages for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoreply")
 public class AutoReplyModule extends ModuleImplementation {
 }

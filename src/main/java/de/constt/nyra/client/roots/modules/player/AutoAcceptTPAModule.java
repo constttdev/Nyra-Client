@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Accept TPA", description = "Automatically handles accept TPA.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoaccepttpa")
+@ModuleInfoAnnotation(name = "Auto Accept TPA", description = "Automatically accepts TPA requests for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoaccepttpa")
 public class AutoAcceptTPAModule extends ModuleImplementation {
 }

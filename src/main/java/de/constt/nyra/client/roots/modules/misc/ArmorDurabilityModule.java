@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Armor Durability", description = "Enables the Armor Durability module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "armordurability")
+@ModuleInfoAnnotation(name = "Armor Durability", description = "Allows you to see the durability of armour", category = CategoryImplementation.Categories.MISC, internalModuleName = "armordurability")
 public class ArmorDurabilityModule extends ModuleImplementation {
 }

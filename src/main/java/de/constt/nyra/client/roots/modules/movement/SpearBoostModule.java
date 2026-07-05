@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Spear Boost", description = "Enables the Spear Boost mode.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "spearboost")
+@ModuleInfoAnnotation(name = "Spear Boost", description = "Your spear gets boosted without boosting it yourself", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "spearboost")
 public class SpearBoostModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto GApple", description = "Automatically handles gApple.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autogapple")
+@ModuleInfoAnnotation(name = "Auto GApple", description = "Uses your gapples for you when needed", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autogapple")
 public class AutoGAppleModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Reconnect", description = "Automatically handles reconnect.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoreconnect")
+@ModuleInfoAnnotation(name = "Auto Reconnect", description = "Reconnects to a server for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoreconnect")
 public class AutoReconnectModule extends ModuleImplementation {
 }

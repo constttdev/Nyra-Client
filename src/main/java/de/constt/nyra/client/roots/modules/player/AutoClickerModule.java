@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Clicker", description = "Automatically handles clicker.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoclicker")
+@ModuleInfoAnnotation(name = "Auto Clicker", description = "Automatically clicks for you at a customizable speed", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoclicker")
 public class AutoClickerModule extends ModuleImplementation {
 }
