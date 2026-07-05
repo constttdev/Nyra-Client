@@ -5,6 +5,7 @@ import de.constt.nyra.client.clientcommands.CCommandManager;
 import de.constt.nyra.client.discordRpc.DiscordIPCCore;
 import de.constt.nyra.client.managers.EventManager;
 import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.utils.ImGuiStyleUtils;
 import de.constt.nyra.client.utils.InstanceUtils;
 import de.constt.nyra.client.utils.MessageUtils;
 import net.fabricmc.api.ClientModInitializer;
