@@ -52,7 +52,14 @@ public final class ColorUtils {
         int r = (argb >>> 16) & 0xFF;
         int g = (argb >>> 8) & 0xFF;
         int b = argb & 0xFF;
-
         return (a << 24) | (b << 16) | (g << 8) | r;
+    }
+
+    public static int toImGuiColor(int argb) {
+        int a = (argb >>> 24) & 0xFF;
+        int r = (argb >>> 16) & 0xFF;
+        int g = (argb >>> 8) & 0xFF;
+        int b = argb & 0xFF;
+        return (a << 24) | (r << 16) | (g << 8) | b;
     }
 }

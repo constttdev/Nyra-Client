@@ -101,7 +101,6 @@ public class BaseScreen extends Screen {
     public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         try (ImGuiMC.ActiveContext ctx = ImGuiMC.withImGui()) {
             if (ctx != null) {
-                render();
 
                 refreshThemeColors();
 
@@ -111,24 +110,32 @@ public class BaseScreen extends Screen {
                 ImGui.pushStyleVar(ImGuiStyleVar.ScrollbarSize, 4f);
                 ImGui.pushStyleVar(ImGuiStyleVar.ItemSpacing, 8f, 6f);
 
-                ImGui.pushStyleColor(ImGuiCol.WindowBg, COL_BG);
-                ImGui.pushStyleColor(ImGuiCol.Border, COL_DIVIDER);
-                ImGui.pushStyleColor(ImGuiCol.Text, ColorUtils.imGuiColor(COL_TEXT));
-                ImGui.pushStyleColor(ImGuiCol.ScrollbarBg, COL_TRANSPARENT);
-                ImGui.pushStyleColor(
-                        ImGuiCol.ScrollbarGrabHovered,
-                        ColorUtils.imGuiColor(ColorUtils.getHoverColor(COL_SCROLLBAR))
-                );
+                ImGui.pushStyleColor(ImGuiCol.WindowBg, ColorUtils.toImGuiColor(COL_BG));
+                ImGui.pushStyleColor(ImGuiCol.Border, ColorUtils.toImGuiColor(COL_DIVIDER));
+                ImGui.pushStyleColor(ImGuiCol.Text, ColorUtils.toImGuiColor(COL_TEXT));
 
-                ImGui.pushStyleColor(ImGuiCol.ScrollbarGrabHovered,
-                        ColorUtils.getHoverColor(COL_SCROLLBAR));
+                ImGui.pushStyleColor(ImGuiCol.ScrollbarBg, 0x00000000);
+                ImGui.pushStyleColor(ImGuiCol.ScrollbarGrab, ColorUtils.toImGuiColor(COL_SCROLLBAR));
+                ImGui.pushStyleColor(ImGuiCol.ScrollbarGrabHovered, ColorUtils.toImGuiColor(ColorUtils.getHoverColor(COL_SCROLLBAR)));
+                // ImGui.pushStyleColor(ImGuiCol.ScrollbarGrabActive, ColorUtils.toImGuiColor(ColorUtils.getPressedColor(COL_SCROLLBAR))); .getPressedColor() doesnt exsist
 
-                ImGui.pushStyleColor(ImGuiCol.ScrollbarGrabActive, COL_ACCENT);
-                ImGui.pushStyleColor(ImGuiCol.PopupBg, COL_SIDEBAR);
-                ImGui.pushStyleColor(ImGuiCol.ChildBg, COL_TRANSPARENT);
+                ImGui.pushStyleColor(ImGuiCol.PopupBg, ColorUtils.toImGuiColor(COL_SIDEBAR));
+                ImGui.pushStyleColor(ImGuiCol.ChildBg, 0x00000000);
 
-                ImGui.popStyleColor(9);
+                ImGui.popStyleColor();
+                ImGui.popStyleColor();
+                ImGui.popStyleColor();
+                ImGui.popStyleColor();
+                ImGui.popStyleColor();
+                ImGui.popStyleColor();
+                // ImGui.popStyleColor();
+                ImGui.popStyleColor();
+                ImGui.popStyleColor();
                 ImGui.popStyleVar(5);
+
+                // RENDERING
+                ImGui.text("BASESCREEN TEXT");
+                render();
             }
         }
         super.extractRenderState(graphics, mouseX, mouseY, a);

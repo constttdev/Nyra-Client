@@ -18,13 +18,9 @@ public class ModulesScreen extends BaseScreen {
     public void render() {
         super.render();
 
-        ImGui.pushStyleColor(ImGuiCol.Text, COL_TEXT);
-        ColorUtils.debugColor("IMGUI_TEXT", COL_TEXT);
-        ImGui.text("TEST TEXT");
-        ImGui.popStyleColor();
-        ImGui.textColored(0xFFFF0000, "FORCED RED TEST");
-
         int offset = 0;
+
+        ImGui.text("MODULESCREEN TEXT");
 
         for (CategoryImplementation.Categories category : CategoryImplementation.Categories.values()) {
 
