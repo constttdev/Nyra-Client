@@ -12,10 +12,10 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class ThemeUtils {
-    protected static int accent    = 0xFF6969FF;
-    protected static int secondary = 0xFF505050;
-    protected static int bg        = 0xE0262626;
-    protected static int text      = 0xFFFFFFFF;
+    public static int accent = 0xFF6969FF;
+    public static int secondary = 0xFF505050;
+    public static int bg = 0xE0262626;
+    public static int text = 0xFFFFFFFF;
 
     // ── Background animation palette ──────────────────────────────────────────
     public static int[] backgroundPalette = {
@@ -42,7 +42,7 @@ public class ThemeUtils {
 
     // ── File paths ────────────────────────────────────────────────────────────
     private static final Path THEMES_DIR = Path.of(
-            FabricLoader.getInstance().getConfigDir() + "/scalare/themes"
+            FabricLoader.getInstance().getConfigDir() + "/" + VarUtils.getModID() + "/themes"
     );
     private static final Path THEME_PATH = THEMES_DIR.resolve("default.cfg");
 

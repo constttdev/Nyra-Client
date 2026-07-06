@@ -4,6 +4,7 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.SettingImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.utils.ColorUtils;
 import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
@@ -16,6 +17,12 @@ public class ModulesScreen extends BaseScreen {
     @Override
     public void render() {
         super.render();
+
+        ImGui.pushStyleColor(ImGuiCol.Text, COL_TEXT);
+        ColorUtils.debugColor("IMGUI_TEXT", COL_TEXT);
+        ImGui.text("TEST TEXT");
+        ImGui.popStyleColor();
+        ImGui.textColored(0xFFFF0000, "FORCED RED TEST");
 
         int offset = 0;
 
