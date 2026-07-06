@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Discord RPC", description = "Enables the Discord RPC module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "discordrpc")
+@ModuleInfoAnnotation(name = "Discord RPC", description = "Toggles Nyra Clients Discord Rich Presence", category = CategoryImplementation.Categories.MISC, internalModuleName = "discordrpc")
 public class DiscordRPCModule extends ModuleImplementation {
 }

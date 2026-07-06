@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Fast Use", description = "Enables the Fast Use module.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "fastuse")
+@ModuleInfoAnnotation(name = "Fast Use", description = "Lets you use your items quicker than usual", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "fastuse")
 public class FastUseModule extends ModuleImplementation {
 }

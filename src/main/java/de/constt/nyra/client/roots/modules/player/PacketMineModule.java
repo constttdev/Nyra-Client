@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Packet Mine", description = "Enables the Packet Mine module.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "packetmine")
+@ModuleInfoAnnotation(name = "Packet Mine", description = "Mines using packets", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "packetmine")
 public class PacketMineModule extends ModuleImplementation {
 }

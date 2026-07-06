@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Tool", description = "Automatically handles tool.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autotool")
+@ModuleInfoAnnotation(name = "Auto Tool", description = "Uses tools for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autotool")
 public class AutoToolModule extends ModuleImplementation {
 }

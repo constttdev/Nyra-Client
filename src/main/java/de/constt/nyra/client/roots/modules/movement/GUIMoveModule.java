@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "GUI Move", description = "Enables the GUI Move module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "guimove")
+@ModuleInfoAnnotation(name = "GUI Move", description = "Allows you to move while in a GUI", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "guimove")
 public class GUIMoveModule extends ModuleImplementation {
 }

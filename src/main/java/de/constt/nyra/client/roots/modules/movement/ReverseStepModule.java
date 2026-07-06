@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Reverse Step", description = "Enables the Reverse Step module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "reversestep")
+@ModuleInfoAnnotation(name = "Reverse Step", description = "Speed is faster than usual while falling down", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "reversestep")
 public class ReverseStepModule extends ModuleImplementation {
 }

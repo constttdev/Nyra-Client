@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Lifetime Statistics", description = "Enables the Lifetime Statistics module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "lifetimestatistics")
+@ModuleInfoAnnotation(name = "Lifetime Statistics", description = "Shows you your lifetime statistics", category = CategoryImplementation.Categories.MISC, internalModuleName = "lifetimestatistics")
 public class LifetimeStatisticsModule extends ModuleImplementation {
 }

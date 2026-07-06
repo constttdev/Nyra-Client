@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Clock", description = "Enables the Clock module.", category = CategoryImplementation.Categories.MISC, internalModuleName = "clock")
+@ModuleInfoAnnotation(name = "Clock", description = "Shows what the time is", category = CategoryImplementation.Categories.MISC, internalModuleName = "clock")
 public class ClockModule extends ModuleImplementation {
 }

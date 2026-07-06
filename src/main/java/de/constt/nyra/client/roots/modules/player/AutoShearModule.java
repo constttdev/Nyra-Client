@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Shear", description = "Automatically handles shear.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoshear")
+@ModuleInfoAnnotation(name = "Auto Shear", description = "Uses your shears on sheep for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autoshear")
 public class AutoShearModule extends ModuleImplementation {
 }

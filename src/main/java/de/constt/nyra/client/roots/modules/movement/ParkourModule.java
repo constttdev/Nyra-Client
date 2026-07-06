@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Parkour", description = "Enables the Parkour module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "parkour")
+@ModuleInfoAnnotation(name = "Parkour", description = "Does parkour for you", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "parkour")
 public class ParkourModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Item Rename", description = "Automatically handles item Rename.", category = CategoryImplementation.Categories.MISC, internalModuleName = "autoitemrename")
+@ModuleInfoAnnotation(name = "Auto Item Rename", description = "Handles item renaming for you", category = CategoryImplementation.Categories.MISC, internalModuleName = "autoitemrename")
 public class AutoItemRenameModule extends ModuleImplementation {
 }

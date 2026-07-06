@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Inventory Manager", description = "Enables the Inventory Manager module.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "inventorymanager")
+@ModuleInfoAnnotation(name = "Inventory Manager", description = "Manages your inventory", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "inventorymanager")
 public class InventoryManagerModule extends ModuleImplementation {
 }

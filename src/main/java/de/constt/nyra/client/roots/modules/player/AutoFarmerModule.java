@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Farmer", description = "Automatically handles farmer.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autofarmer")
+@ModuleInfoAnnotation(name = "Auto Farmer", description = "Handles farming for you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "autofarmer")
 public class AutoFarmerModule extends ModuleImplementation {
 }

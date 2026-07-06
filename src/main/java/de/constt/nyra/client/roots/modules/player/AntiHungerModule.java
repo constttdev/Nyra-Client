@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Anti Hunger", description = "Automatically protects against hunger.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "antihunger")
+@ModuleInfoAnnotation(name = "Anti Hunger", description = "Removes hunger from you", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "antihunger")
 public class AntiHungerModule extends ModuleImplementation {
 }

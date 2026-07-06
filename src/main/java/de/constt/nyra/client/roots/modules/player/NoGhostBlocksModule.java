@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "No Ghost Blocks", description = "Automatically disables ghost Blocks.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "noghostblocks")
+@ModuleInfoAnnotation(name = "No Ghost Blocks", description = "Prevents ghost blocks from appearing", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "noghostblocks")
 public class NoGhostBlocksModule extends ModuleImplementation {
 }

@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Boat Fly", description = "Enables the Boat Fly module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "boatfly")
+@ModuleInfoAnnotation(name = "Boat Fly", description = "Fly with boats", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "boatfly")
 public class BoatFlyModule extends ModuleImplementation {
 }

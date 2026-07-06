@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Timer", description = "Enables the Timer module.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "timer")
+@ModuleInfoAnnotation(name = "Timer", description = "Allows you to change your games speed", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "timer")
 public class TimerModule extends ModuleImplementation {
 }

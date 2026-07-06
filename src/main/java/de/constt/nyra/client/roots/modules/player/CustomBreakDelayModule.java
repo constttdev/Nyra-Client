@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Custom Break Delay", description = "Enables the Custom Break Delay module.", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "custombreakdelay")
+@ModuleInfoAnnotation(name = "Custom Break Delay", description = "Allows you to modify your break delay", category = CategoryImplementation.Categories.PLAYER, internalModuleName = "custombreakdelay")
 public class CustomBreakDelayModule extends ModuleImplementation {
 }

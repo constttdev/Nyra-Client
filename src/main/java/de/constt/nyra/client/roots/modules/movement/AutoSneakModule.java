@@ -4,6 +4,6 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 
 
-@ModuleInfoAnnotation(name = "Auto Sneak", description = "Automatically handles sneak.", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "autosneak")
+@ModuleInfoAnnotation(name = "Auto Sneak", description = "Automatically sneaks for you", category = CategoryImplementation.Categories.MOVEMENT, internalModuleName = "autosneak")
 public class AutoSneakModule extends ModuleImplementation {
 }
