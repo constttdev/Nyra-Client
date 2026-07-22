@@ -8,7 +8,6 @@ public class CategoryImplementation {
         MISC,
         PLAYER,
         EXPLOITS,
-        WORLD,
-        EVENTS
+        WORLD
     }
 }
