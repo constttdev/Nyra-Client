@@ -36,4 +36,4 @@ Read the License at LICENSE.txt file
 - If you want to support our work you can either donate to our Ko-Fi or on our Website
 
 ### Credits
-- [Credits](https://github.com/constttdev/nyra-client/blob/main/CREDITS.md)
+- [Credits](https://github.com/constttdev/Nyra-Client/blob/master/CREDITS.md)
