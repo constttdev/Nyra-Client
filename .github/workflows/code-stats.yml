@@ -1,0 +1,43 @@
+name: Weekly Code Stats
+
+on:
+  schedule:
+    - cron: "0 18 * * 0"
+  workflow_dispatch:
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cloc
+        run: sudo apt-get update && sudo apt-get install -y cloc
+
+      - name: Generate stats
+        run: |
+          cloc . \
+            --exclude-dir=.git,.gradle,build,out,run \
+            > stats.txt
+
+      - name: Send to Discord
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          CONTENT=$(cat stats.txt)
+
+          jq -n \
+            --arg text "$CONTENT" \
+            '{
+              embeds: [{
+                title: "📊 Weekly Code Statistics",
+                description: "```" + $text + "```",
+                color: 3447003,
+                timestamp: now | todateiso8601
+              }]
+            }' \
+          | curl -H "Content-Type: application/json" \
+                 -X POST \
+                 -d @- \
+                 "$WEBHOOK"
