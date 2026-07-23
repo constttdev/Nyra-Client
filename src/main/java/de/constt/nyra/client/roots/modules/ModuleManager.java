@@ -5,6 +5,7 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.modules.combat.*;
 import de.constt.nyra.client.roots.modules.exploits.AutoBookBanSetupModule;
+import de.constt.nyra.client.roots.modules.exploits.BlockedServerBypassModule;
 import de.constt.nyra.client.roots.modules.misc.*;
 import de.constt.nyra.client.roots.modules.movement.*;
 import de.constt.nyra.client.roots.modules.player.*;
@@ -59,6 +60,7 @@ public class ModuleManager {
 
         // -- EXPLOITS --
         MODULES.add(new AutoBookBanSetupModule());
+        MODULES.add(new BlockedServerBypassModule());
 
         // -- MISC --
         MODULES.add(new AntiSpamModule());

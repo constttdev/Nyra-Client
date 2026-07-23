@@ -6,42 +6,51 @@ import de.constt.nyra.client.roots.implementations.SettingImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import imgui.ImGui;
-import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiStyleVar;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ModulesScreen extends BaseScreen {
 
-    private ModuleImplementation settingsModule;
+    private final Set<ModuleImplementation> expandedModules = new HashSet<>();
 
     @Override
     public void render() {
+        float screenWidth = ImGui.getIO().getDisplaySizeX();
+        float screenHeight = ImGui.getIO().getDisplaySizeY();
 
-        ImGui.text("Nyra Client");
+        int categories = CategoryImplementation.Categories.values().length;
 
-        ImGui.spacing();
+        float spacing = 20;
+        float width = Math.max(220, (screenWidth - spacing * (categories + 1)) / categories);
+        float height = screenHeight - 120;
 
         int index = 0;
 
         for (CategoryImplementation.Categories category : CategoryImplementation.Categories.values()) {
 
             ImGui.setNextWindowPos(
-                    30 + index * 250,
-                    60,
-                    ImGuiCond.FirstUseEver
+                    spacing + index * (width + spacing),
+                    60
             );
 
             ImGui.setNextWindowSize(
-                    230,
-                    420,
-                    ImGuiCond.FirstUseEver
+                    width,
+                    height
             );
 
-            ImGui.pushStyleVar(ImGuiStyleVar.WindowPadding, 14, 14);
+            ImGui.pushStyleVar(ImGuiStyleVar.WindowPadding, 12, 12);
 
-            if (ImGui.begin(category.name())) {
+            if (ImGui.begin(
+                    category.name(),
+                    imgui.flag.ImGuiWindowFlags.NoMove |
+                            imgui.flag.ImGuiWindowFlags.NoResize |
+                            imgui.flag.ImGuiWindowFlags.NoCollapse
+            )) {
 
                 ImGui.beginChild(
-                        category.name() + "_modules",
+                        category.name() + "_content",
                         0,
                         0,
                         false
@@ -64,84 +73,74 @@ public class ModulesScreen extends BaseScreen {
 
             index++;
         }
-
-        drawSettings();
     }
 
 
     private void drawModule(ModuleImplementation module) {
 
-        if (ImGui.button(
-                module.getTranslatableText(),
-                200,
-                32
-        )) {
+        boolean expanded = expandedModules.contains(module);
+
+        String label = module.getTranslatableText();
+
+        if (module.isEnabled()) {
+            label += " [ON]";
+        }
+
+        if (ImGui.button(label, ImGui.getContentRegionAvailX(), 32)) {
             module.toggle();
         }
 
         if (ImGui.isItemClicked(1)) {
-            settingsModule = module;
+            if (expanded) {
+                expandedModules.remove(module);
+            } else {
+                expandedModules.add(module);
+            }
+        }
+
+        if (expanded) {
+            ImGui.pushStyleVar(
+                    ImGuiStyleVar.ChildRounding,
+                    6
+            );
+
+            ImGui.beginChild(
+                    module.getTranslatableText() + "_settings",
+                    0,
+                    calculateSettingsHeight(module),
+                    true
+            );
+
+            ImGui.text(
+                    ModuleAnnotationUtils.getDescription(
+                            module.getClass()
+                    )
+            );
+
+            ImGui.spacing();
+
+            for (SettingImplementation<?> setting : module.getSettings()) {
+                setting.renderImGui();
+                ImGui.spacing();
+            }
+
+            module.renderCustomSettings();
+
+            ImGui.endChild();
+
+            ImGui.popStyleVar();
         }
 
         ImGui.spacing();
     }
 
 
-    private void drawSettings() {
+    private float calculateSettingsHeight(ModuleImplementation module) {
 
-        if (settingsModule == null)
-            return;
+        float height = 45;
 
-        ImGui.setNextWindowSize(
-                350,
-                450,
-                ImGuiCond.FirstUseEver
-        );
+        height += module.getSettings().size() * 45;
 
-        ImGui.pushStyleVar(
-                ImGuiStyleVar.WindowPadding,
-                16,
-                16
-        );
-
-        if (ImGui.begin(
-                settingsModule.getTranslatableText() + " Settings"
-        )) {
-
-            ImGui.text(settingsModule.getTranslatableText());
-
-            ImGui.separator();
-
-            ImGui.beginChild(
-                    "settings",
-                    0,
-                    0,
-                    false
-            );
-
-
-            ImGui.text(
-                    ModuleAnnotationUtils.getDescription(
-                            settingsModule.getClass()
-                    )
-            );
-
-            ImGui.spacing();
-
-            ImGui.separator();
-
-            for (SettingImplementation<?> setting : settingsModule.getSettings()) {
-                setting.renderImGui();
-                ImGui.spacing();
-            }
-
-            settingsModule.renderCustomSettings();
-
-            ImGui.endChild();
-        }
-
-        ImGui.end();
-
-        ImGui.popStyleVar();
+        return Math.min(height, 300);
     }
 }
