@@ -28,6 +28,7 @@ public class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     public void render(CallbackInfo ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Modules Screen"), (button) -> {
+            //~ if <=1.21.10 setScreenAndShow -> setScreen
             Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
         }).bounds(this.width - 75 - 3, 3, 70, 20).build());
     }

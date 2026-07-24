@@ -6,9 +6,11 @@ import foundry.imgui.api.ImGuiMC;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
+//~if <26.1 GuiGraphicsExtractor -> GuiGraphics
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+//?if >1.21.11
 import org.jspecify.annotations.NonNull;
 
 public class BaseScreen extends Screen {
@@ -171,7 +173,10 @@ public class BaseScreen extends Screen {
     }
 
     @Override
+    //~if <26.1 extractRenderState -> render
     public void extractRenderState(
+            //~if <26.1 GuiGraphicsExtractor -> GuiGraphics
+            //~ if <=1.21.11 '@NonNull GuiGraphicsExtractor graphics,' -> 'GuiGraphics graphics,'
             @NonNull GuiGraphicsExtractor graphics,
             int mouseX,
             int mouseY,
@@ -193,6 +198,7 @@ public class BaseScreen extends Screen {
             }
         }
 
+        //~if <26.1 extractRenderState -> render
         super.extractRenderState(graphics, mouseX, mouseY, delta);
     }
 

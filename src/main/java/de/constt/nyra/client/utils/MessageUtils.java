@@ -29,11 +29,11 @@ public class MessageUtils {
     public static void sendCSMessageNeutral(String msg) {
         Minecraft mc = Minecraft.getInstance();
 
-        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
-        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
 
         MutableComponent component = getPrefix(false).copy();
 
+        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
+        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
         mc.gui.hud.getChat().addClientSystemMessage(
                 component.append(Component.literal(msg).withStyle(ChatFormatting.GRAY)));
     }
@@ -41,11 +41,11 @@ public class MessageUtils {
     public static void sendCSMessageSucess(String msg) {
         Minecraft mc = Minecraft.getInstance();
 
-        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
-        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
 
         MutableComponent component = getPrefix(false).copy();
 
+        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
+        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
         mc.gui.hud.getChat().addClientSystemMessage(
                 component.append(Component.literal(msg).withStyle(ChatFormatting.GREEN))
         );
@@ -54,11 +54,11 @@ public class MessageUtils {
     public static void sendCSMessageWarning(String msg) {
         Minecraft mc = Minecraft.getInstance();
 
-        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
-        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
 
         MutableComponent component = getPrefix(false).copy();
 
+        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
+        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
         mc.gui.hud.getChat().addClientSystemMessage(
                 component.append(Component.literal(msg).withStyle(ChatFormatting.YELLOW)));
     }
@@ -66,11 +66,11 @@ public class MessageUtils {
     public static void sendCSMessageError(String msg) {
         Minecraft mc = Minecraft.getInstance();
 
-        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
-        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
 
         MutableComponent component = getPrefix(false).copy();
 
+        //~ if < 26.2 'mc.gui.hud.getChat()' -> 'mc.gui.getChat()'
+        //~ if <= 1.21.11 'addClientSystemMessage' -> 'addMessage'
         mc.gui.hud.getChat().addClientSystemMessage(
                 component.append(Component.literal(msg).withStyle(ChatFormatting.RED)));
     }

@@ -40,6 +40,7 @@ public class ClientTickEventsEvent {
             NativeImage image = NativeImage.read(inputStream);
 
             ByteBuffer pixelBuffer = MemoryUtil.memAlloc(image.getWidth() * image.getHeight() * 4);
+            //~if 1.21.1 getPixelsABGR -> getPixelsRGBA
             pixelBuffer.asIntBuffer().put(image.getPixelsABGR());
 
             GLFWImage.Buffer buf = GLFWImage.malloc(1, stack);
@@ -48,6 +49,7 @@ public class ClientTickEventsEvent {
             buf.pixels(pixelBuffer);
 
             GLFW.glfwSetWindowIcon(
+                    //~ if <=1.21.8 'getWindow().handle()' -> 'getWindow().getWindow()'
                     Minecraft.getInstance().getWindow().handle(),
                     buf
             );

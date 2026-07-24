@@ -23,9 +23,9 @@ public class TitleUtils {
             if (player == null) return;
 
             //~if <= 26.1.2 'gui.hud' -> 'gui'
-            mc.gui.setOverlayMessage(title, false); // shows it as overlay in client
+            mc.gui.hud.setOverlayMessage(title, false); // shows it as overlay in client
             //~if <= 26.1.2 'gui.hud' -> 'gui'
-            mc.gui.setOverlayMessage(subtitle, false); // subtitle
+            mc.gui.hud.setOverlayMessage(subtitle, false); // subtitle
     }
 
     public static void sendCSTitleNeutral(String msg) {

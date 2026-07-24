@@ -124,6 +124,9 @@ tasks {
 
     register<Copy>("buildAndCollect") {
         group = "build"
+        doFirst {
+            delete(rootProject.layout.buildDirectory.dir("libs/${project.property("mod.version")}"))
+        }
         from(loomx.modJar.map { it.archiveFile }, loomx.modSourcesJar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")

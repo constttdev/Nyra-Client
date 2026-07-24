@@ -15,6 +15,7 @@ public class ClickGuiCommand extends CommandImplementation {
         super.executeCommand(parts);
 
         Minecraft.getInstance().execute(() -> {
+            //~ if <=1.21.10 setScreenAndShow -> setScreen
             Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
         });
     }
