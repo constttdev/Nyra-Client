@@ -5,3 +5,4 @@
 - [Meteor Client](https://meteorclient.net): [Splashtext Mixin](https://github.com/MeteorDevelopment/meteor-client/blob/master/src%2Fmain%2Fjava%2Fmeteordevelopment%2Fmeteorclient%2Fmixin%2FSplashTextResourceSupplierMixin.java)
 - [Foundry](https://github.com/FoundryMC): [ImGuiMC](https://github.com/FoundryMC/imguimc)
 - [Google Fonts](https://fonts.google.com): [Rubik Variable Font](https://fonts.google.com/specimen/Rubik)
+- [6b6t](https://github.com/6b6t): [Anarchy Mod](https://github.com/6b6t/AnarchyMod) 
