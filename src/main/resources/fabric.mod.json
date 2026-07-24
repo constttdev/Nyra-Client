@@ -26,5 +26,10 @@
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}"
-  }
+  },
+  "jars": [
+    {
+      "file": "META-INF/jars/DiscordIPC-0.10.2.jar"
+    }
+  ]
 }

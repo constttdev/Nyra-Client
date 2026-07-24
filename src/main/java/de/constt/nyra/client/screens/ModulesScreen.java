@@ -44,7 +44,6 @@ public class ModulesScreen extends BaseScreen {
 
             if (ImGui.begin(
                     category.name(),
-                    imgui.flag.ImGuiWindowFlags.NoMove |
                             imgui.flag.ImGuiWindowFlags.NoResize |
                             imgui.flag.ImGuiWindowFlags.NoCollapse
             )) {

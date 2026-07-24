@@ -4,7 +4,6 @@ import de.constt.nyra.client.utils.ColorUtils;
 import de.constt.nyra.client.utils.ThemeUtils;
 import foundry.imgui.api.ImGuiMC;
 import imgui.ImGui;
-import imgui.ImGuiIO;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -26,6 +25,23 @@ public class BaseScreen extends Screen {
 
     public BaseScreen() {
         super(Component.literal("Base Screen"));
+    }
+
+    protected static float uiScale = 1.0f;
+
+    private void updateUIScale() {
+        float width = ImGui.getIO().getDisplaySizeX();
+        float height = ImGui.getIO().getDisplaySizeY();
+
+        float scaleX = width / 1920f;
+        float scaleY = height / 1080f;
+
+        uiScale = Math.min(scaleX, scaleY);
+        uiScale = Math.clamp(uiScale, 0.7f, 1.5f);
+    }
+
+    protected float s(float value) {
+        return value * uiScale;
     }
 
     private static void updateTheme() {
@@ -82,6 +98,45 @@ public class BaseScreen extends Screen {
         );
 
         ImGui.pushStyleColor(
+                ImGuiCol.FrameBg,
+                ColorUtils.toImGuiColor(sidebar)
+        );
+        ImGui.pushStyleColor(
+                ImGuiCol.FrameBgHovered,
+                ColorUtils.toImGuiColor(ColorUtils.lighten(sidebar, 0.15f))
+        );
+        ImGui.pushStyleColor(
+                ImGuiCol.FrameBgActive,
+                ColorUtils.toImGuiColor(accentDim)
+        );
+        ImGui.pushStyleColor(
+                ImGuiCol.CheckMark,
+                ColorUtils.toImGuiColor(accent)
+        );
+
+        ImGui.pushStyleColor(
+                ImGuiCol.SliderGrab,
+                ColorUtils.toImGuiColor(accent)
+        );
+        ImGui.pushStyleColor(
+                ImGuiCol.SliderGrabActive,
+                ColorUtils.toImGuiColor(ColorUtils.lighten(accent, 0.15f))
+        );
+
+        ImGui.pushStyleColor(
+                ImGuiCol.Header,
+                ColorUtils.toImGuiColor(accentDim)
+        );
+        ImGui.pushStyleColor(
+                ImGuiCol.HeaderHovered,
+                ColorUtils.toImGuiColor(accentMedium)
+        );
+        ImGui.pushStyleColor(
+                ImGuiCol.HeaderActive,
+                ColorUtils.toImGuiColor(accent)
+        );
+
+        ImGui.pushStyleColor(
                 ImGuiCol.ScrollbarBg,
                 ColorUtils.toImGuiColor(bg)
         );
@@ -93,10 +148,25 @@ public class BaseScreen extends Screen {
                 ImGuiCol.ScrollbarGrabHovered,
                 ColorUtils.toImGuiColor(ColorUtils.getHoverColor(scrollbar))
         );
+
+        ImGui.pushStyleColor(
+                ImGuiCol.TitleBg,
+                ColorUtils.toImGuiColor(sidebar)
+        );
+
+        ImGui.pushStyleColor(
+                ImGuiCol.TitleBgActive,
+                ColorUtils.toImGuiColor(accentDim)
+        );
+
+        ImGui.pushStyleColor(
+                ImGuiCol.TitleBgCollapsed,
+                ColorUtils.toImGuiColor(sidebar)
+        );
     }
 
     private void popTheme() {
-        ImGui.popStyleColor(11);
+        ImGui.popStyleColor(23);
         ImGui.popStyleVar(9);
     }
 
@@ -111,6 +181,8 @@ public class BaseScreen extends Screen {
         try (ImGuiMC.ActiveContext ignored = ImGuiMC.withImGui()) {
 
             updateTheme();
+
+            updateUIScale();
 
             pushTheme();
 

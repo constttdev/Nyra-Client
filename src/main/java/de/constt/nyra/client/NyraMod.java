@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class NyraMod implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("nyra");
     public static final String VERSION = /*$ mod_version*/ "0.0.1";
-    public static final String MINECRAFT = /*$ minecraft*/ "26.2";
+    public static final String MINECRAFT = /*$ minecraft*/ "1.21.11";
 
     @Override
     public void onInitializeClient() {

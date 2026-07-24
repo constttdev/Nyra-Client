@@ -8,5 +8,8 @@
   "client": [
     "SplashManagerMixin",
     "TitleScreenMixin"
+  ],
+  "mixins": [
+    "BlockedServersMixin"
   ]
 }

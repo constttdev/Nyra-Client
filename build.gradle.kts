@@ -59,9 +59,7 @@ dependencies {
     }
 
     // Discord IPC - LOCAL JAR ONLY (jagrosh is not on any Maven repo)
-    val discordJar = files(rootProject.file("lib/DiscordIPC-0.10.2.jar"))
-    implementation(discordJar)
-    include(discordJar)
+    implementation(files(rootProject.file("lib/DiscordIPC-0.10.2.jar")))
 
     // Junixsocket
     implementation("com.kohlschutter.junixsocket:junixsocket-common:2.10.1")
