@@ -15,15 +15,17 @@ public class ClientSendMessageEvent {
 
         ClientSendMessageEvents.ALLOW_CHAT.register((message) -> {
 
-            if (message.charAt(0) == '$') {
+            if (message.startsWith(CCommandManager.cmdPrefix)) {
                 LocalPlayer player = Minecraft.getInstance().player;
-                System.out.println("a");
                 if (player == null) return false;
-                System.out.println("b");
-
-                if (!message.startsWith(CCommandManager.cmdPrefix)) return true;
 
                 String raw = message.substring(CCommandManager.cmdPrefix.length()).trim();
+
+                if (raw.isEmpty()) {
+                    MessageUtils.sendCSMessageNeutral("Command cannot be empty");
+                    return false;
+                }
+
                 String[] split = raw.split(" ");
 
                 String cmdName = split[0];
@@ -31,42 +33,45 @@ public class ClientSendMessageEvent {
                         ? Arrays.copyOfRange(split, 1, split.length)
                         : new String[0];
 
-                for (var commandClass : CCommandManager.getCommands()) {
-                    String name = CommandAnnotationUtils.getCommand(commandClass.getClass());
+                boolean found = false;
 
-                    System.out.println("name: " + name + " | cmdName: " + cmdName + " | args: " + Arrays.toString(args));
+                for (var command : CCommandManager.getCommands()) {
+                    String name = CommandAnnotationUtils.getCommand(command.getClass());
 
-                    if (name.equalsIgnoreCase(cmdName)) {
-                        commandClass.executeCommand(args);
+                    if (name != null && name.equalsIgnoreCase(cmdName)) {
+                        found = true;
+                        command.executeCommand(args);
                         break;
                     }
+                }
+
+                if (!found) {
+                    MessageUtils.sendCSMessageNeutral(
+                            "Unknown command: " + cmdName
+                    );
                 }
 
                 return false;
             }
 
-            if (message.charAt(0) == '#') {
+            if (message.startsWith("#")) {
 
                 String msg;
 
-                if (message.charAt(1) == ' ') { // avoid space at the start of message
+                if (message.length() > 1 && message.charAt(1) == ' ') {
                     msg = message.substring(2);
                 } else {
                     msg = message.substring(1);
                 }
 
-                MessageUtils.sendCSMessageNeutral("Message started with #," +
-                        " sending this message to IPC: " + msg);
-
-                // finish code when server is obtained
+                MessageUtils.sendCSMessageNeutral(
+                        "Message started with #, sending this message to IPC: " + msg
+                );
 
                 return false;
-
             }
 
             return true;
-
         });
     }
-
 }

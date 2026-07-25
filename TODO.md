@@ -219,12 +219,12 @@ Heres a list of what modules are done / still need work
 
 ## Features
 Heres a list of what features are done / still need work
-- [ ] Module Manager
+- [X] Module Manager
 - [ ] Theme selecting 
 - [ ] Change theme in clickgui (new theme, delete theme, set colors)
 - [ ] Friends
 - [X] Bind Modules
-- [X] UnBind Modules
-- [ ] Bind CCommand
-- [ ] UnBind CCommand
+- [X] Unbind Modules
+- [X] Bind CCommand
+- [X] Unbind CCommand
 - [ ] Rendering Library

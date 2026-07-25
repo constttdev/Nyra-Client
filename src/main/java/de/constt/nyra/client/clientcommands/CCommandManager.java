@@ -1,7 +1,9 @@
 package de.constt.nyra.client.clientcommands;
 
 import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
+import de.constt.nyra.client.clientcommands.utils.BindCommand;
 import de.constt.nyra.client.clientcommands.utils.ClickGuiCommand;
+import de.constt.nyra.client.clientcommands.utils.UnbindCommand;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.CommandImplementation;
 
@@ -16,6 +18,8 @@ public class CCommandManager {
         setCmdPrefix("$");
 
         COMMANDS.add(new ClickGuiCommand());
+        COMMANDS.add(new BindCommand());
+        COMMANDS.add(new UnbindCommand());
     }
 
     public static void setCmdPrefix(String prefix) {
