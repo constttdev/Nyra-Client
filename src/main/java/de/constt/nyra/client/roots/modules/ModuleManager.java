@@ -63,6 +63,7 @@ public class ModuleManager {
         MODULES.add(new BlockedServerBypassModule());
 
         // -- MISC --
+        MODULES.add(new ClickGUIModule());
         MODULES.add(new AntiSpamModule());
         MODULES.add(new ArmorDurabilityModule());
         MODULES.add(new ArrayListModule());
@@ -235,8 +236,6 @@ public class ModuleManager {
         MODULES.add(new SpawnProoferModule());
         MODULES.add(new TerrainSlopeVisualizerModule());
         MODULES.add(new TickProfilerModule());
-
-        ModuleCacheUtils.loadAll();
     }
 
     public static List<ModuleImplementation> getModules() {

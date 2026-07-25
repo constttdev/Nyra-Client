@@ -8,9 +8,13 @@ import com.jagrosh.discordipc.entities.Packet;
 import com.jagrosh.discordipc.entities.RichPresence;
 import com.jagrosh.discordipc.entities.User;
 import de.constt.nyra.client.NyraMod;
+import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.roots.modules.misc.DiscordRPCModule;
+import de.constt.nyra.client.utils.TextReplacementUtils;
 import net.minecraft.SharedConstants;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 public final class DiscordIPCCore {
 
@@ -33,10 +37,9 @@ public final class DiscordIPCCore {
                 NyraMod.LOGGER.info("Discord IPC ready!");
                 try {
                     RichPresence.Builder builder = new RichPresence.Builder()
-                            .setActivityType(ActivityType.Playing)
-                            .setState("Being Open Source")
-                            //~ if <1.21.6 'name()' -> 'getName()'
-                            .setDetails(SharedConstants.getCurrentVersion().name())
+                            .setActivityType(Objects.requireNonNull(ModuleManager.getModule(DiscordRPCModule.class)).getActivityType())
+                            .setState(TextReplacementUtils.replace(String.valueOf(Objects.requireNonNull(ModuleManager.getModule(DiscordRPCModule.class)).state)))
+                            .setDetails(TextReplacementUtils.replace(String.valueOf(Objects.requireNonNull(ModuleManager.getModule(DiscordRPCModule.class)).details)))
                             .setLargeImage("logo-1600")
                             .setStartTimestamp(OffsetDateTime.now().toEpochSecond());
 

@@ -1,0 +1,230 @@
+# Todo list
+
+## Modules
+Heres a list of what modules are done / still need work
+
+### Combat
+- [ ] AimAssist
+- [ ] AutoArmor
+- [ ] BedAura
+- [ ] HitCrystal
+- [ ] SelfAnvil
+- [ ] AnchorAura
+- [ ] AutoEXP
+- [ ] BowAimbot
+- [ ] HoleFiller
+- [ ] SelfTrap
+- [ ] AntiAnchor
+- [ ] AutoLog
+- [ ] BowSpam
+- [ ] KillAura
+- [ ] SelfWeb
+- [ ] AntiAnvil
+- [ ] AutoTotem
+- [ ] Burrow
+- [ ] MaceArmorBreaker
+- [ ] ShieldBreaker
+- [ ] AntiBed
+- [ ] AutoTrap
+- [ ] Criticals
+- [ ] Offhand
+- [ ] SpearDash
+- [ ] AttributeSwap
+- [ ] AutoWeapon
+- [ ] CrystalAura
+- [ ] PearlCatcher
+- [ ] Surround
+- [ ] AutoAnvil
+- [ ] AutoWeb
+- [ ] Hitboxes
+- [ ] Triggerbot
+
+### Exploits
+- [ ] AutoBookBanSetup
+- [ ] BlockedServerBypass
+
+### Misc
+- [X] DiscordRPC
+- [ ] ClickGUI
+- [ ] AntiSpam
+- [ ] ChatSpammer
+- [ ] LifetimeStatistics
+- [ ] ScreenshotManager
+- [ ] ArmorDurability
+- [ ] Clock
+- [ ] MusicDisplay
+- [ ] SelfDestruct
+- [ ] ArrayList
+- [ ] Coordinates
+- [ ] Notes
+- [ ] SessionStats
+- [ ] AutoItemRename
+- [ ] CPSCounter
+- [ ] Notifier
+- [ ] SoundBlocker
+- [ ] AutoNametag
+- [ ] DirectionCompass
+- [ ] PacketCounter
+- [ ] TPSGraph
+- [ ] BetterChat
+- [ ] FPSGraph
+- [ ] PingGraph
+- [ ] BetterTab
+- [ ] GPUUsage
+- [ ] Playtime
+- [ ] Biome
+- [ ] InventoryHUD
+- [ ] RAMUsage
+- [ ] BookBot
+- [ ] PotionHUD
+- [ ] Weather
+
+### Movement
+- [ ] AirJump
+- [ ] BoatFly
+- [ ] GUIMove
+- [ ] NoPush
+- [ ] SpearBoost
+- [ ] AntiVoid
+- [ ] ClickTP
+- [ ] HighJump
+- [ ] NoSlow
+- [ ] Spider
+- [ ] AutoJump
+- [ ] IceMode
+- [ ] Parkour
+- [ ] Step
+- [ ] AutoSneak
+- [ ] EntityControl
+- [ ] Jesus
+- [ ] ReverseStep
+- [ ] Timer
+- [ ] AutoSprint
+- [ ] FastClimb
+- [ ] SafeWalk
+- [ ] AutoWalk
+- [ ] Flight
+- [ ] NoFall
+- [ ] Scaffold
+- [ ] ElytraBoost
+- [ ] LongJump
+- [ ] Velocity
+- [ ] TridentBoost
+
+### Player
+- [ ] AntiAFK
+- [ ] AutoFarmer
+- [ ] AutoReplenish
+- [ ] CustomBreakDelay
+- [ ] PacketMine
+- [ ] AntiHunger
+- [ ] AutoFish
+- [ ] AutoReply
+- [ ] EChestFarmer
+- [ ] Reach
+- [ ] AutoAcceptTPA
+- [ ] AutoGApple
+- [ ] AutoRespawn
+- [ ] FastUse
+- [ ] SpeedMine
+- [ ] AutoBreed
+- [ ] AutoGG
+- [ ] AutoShear
+- [ ] GhostInteract
+- [ ] AutoBrew
+- [ ] AutoMace
+- [ ] AutoSign
+- [ ] InventoryManager
+- [ ] AutoClicker
+- [ ] AutoMend
+- [ ] AutoTool
+- [ ] NameProtect
+- [ ] AutoDenyTPA
+- [ ] AutoMount
+- [ ] AutoTrade
+- [ ] NoGhostBlocks
+- [ ] AutoEat
+- [ ] AutoReconnect
+- [ ] ChestSwapper
+- [ ] NoRotate
+- [ ] StreamerMode
+
+### Render
+- [ ] BetterBeacons
+- [ ] Freecam
+- [ ] MusicPacketInspector
+- [ ] Trajectories
+- [ ] BetterTooltips
+- [ ] FreeLook
+- [ ] NametagExtras
+- [ ] TunnelESP
+- [ ] BlockOutline
+- [ ] Fullbright
+- [ ] RenderExtras
+- [ ] VoidESP
+- [ ] Breadcrumbs
+- [ ] HandModel
+- [ ] ScreenshotMarkers
+- [ ] CameraExtras
+- [ ] HoleESP
+- [ ] SoundESP
+- [ ] WallVision
+- [ ] Chams
+- [ ] InventoryTweaks
+- [ ] SoundLogger
+- [ ] CustomCrosshair
+- [ ] ItemPhysics
+- [ ] StorageESP
+- [ ] ESP
+- [ ] LightOverlay
+- [ ] TargetHud
+- [ ] EntityOwner
+- [ ] LogoutMarkers
+- [ ] Tracers
+- [ ] CustomHitSounds
+- [ ] MenuBlur
+- [ ] TimeChanger
+- [ ] WeatherChanger
+- [ ] VolumeProfiles
+- [ ] Xray
+
+### World
+- [ ] BeaconRange
+- [ ] CropGrowthOverlay
+- [ ] OreStatistics
+- [ ] SkyboxEditor
+- [ ] BiomeBorders
+- [ ] DebugOverlay
+- [ ] PacketCanceller
+- [ ] SlimeChunkViewer
+- [ ] BlockCounter
+- [ ] EventLogger
+- [ ] PacketLogger
+- [ ] SpawnChunkOverlay
+- [ ] BlockInfo
+- [ ] EventProfiler
+- [ ] RegionViewer
+- [ ] SpawnProofer
+- [ ] ChunkAgeVisualizer
+- [ ] FogControl
+- [ ] SeedTools
+- [ ] TerrainSlopeVisualizer
+- [ ] CircleSpherePreview
+- [ ] LiquidFiller
+- [ ] ServerSpoof
+- [ ] ConduitRange
+- [ ] ModuleProfiler
+- [ ] TickProfiler
+- [ ] ShapeBuilder
+
+## Features
+Heres a list of what features are done / still need work
+- [ ] Module Manager
+- [ ] Theme selecting 
+- [ ] Change theme in clickgui (new theme, delete theme, set colors)
+- [ ] Friends
+- [ ] Bind Modules
+- [ ] UnBind Modules
+- [ ] Bind CCommand
+- [ ] UnBind CCommand
+- [ ] Rendering Library

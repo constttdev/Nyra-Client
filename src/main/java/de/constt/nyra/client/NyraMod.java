@@ -6,9 +6,7 @@ import de.constt.nyra.client.discordRpc.DiscordIPCCore;
 import de.constt.nyra.client.managers.EventManager;
 import de.constt.nyra.client.payloads.PayloadManager;
 import de.constt.nyra.client.roots.modules.ModuleManager;
-import de.constt.nyra.client.utils.ImGuiStyleUtils;
-import de.constt.nyra.client.utils.InstanceUtils;
-import de.constt.nyra.client.utils.MessageUtils;
+import de.constt.nyra.client.utils.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.network.chat.Component;
@@ -40,14 +38,8 @@ public class NyraMod implements ClientModInitializer {
         // -- Commands --
         CCommandManager.init();
 
-        // Check if DiscordIPC class loaded
-        try {
-            LOGGER.info("DiscordIPC class: {}", IPCClient.class.getName());
-        } catch (Throwable t) {
-            LOGGER.error("DiscordIPC not found!", t);
-        }
-
-        DiscordIPCCore.start();
+        // -- Config Managers --
+        ConfigManagerUtils.loadAllModuleKeybinds();
 
         String title = "Nyra | CL V. " + VERSION + " | MC V. " + MINECRAFT + " | #" + InstanceUtils.getInstanceId();
 

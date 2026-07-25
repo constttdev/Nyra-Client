@@ -1,6 +1,7 @@
 package de.constt.nyra.client.events;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import de.constt.nyra.client.utils.ModuleCacheUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
@@ -15,16 +16,24 @@ import java.nio.ByteBuffer;
 public class ClientTickEventsEvent {
 
     private static boolean iconSet = false;
+    private static boolean loaded = false;
 
     public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register((minecraft) -> {
             if (!iconSet) {
                 try {
-                    ClientTickEventsEvent.setWindowIcon("/assets/nyra/textures/logo-64.png");
+                    ClientTickEventsEvent.setWindowIcon("/assets/nyra/logo-64.png");
                     iconSet = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (!loaded && client.player != null) {
+                ModuleCacheUtils.loadAll();
+                loaded = true;
             }
         });
     }
