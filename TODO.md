@@ -223,8 +223,8 @@ Heres a list of what features are done / still need work
 - [ ] Theme selecting 
 - [ ] Change theme in clickgui (new theme, delete theme, set colors)
 - [ ] Friends
-- [ ] Bind Modules
-- [ ] UnBind Modules
+- [X] Bind Modules
+- [X] UnBind Modules
 - [ ] Bind CCommand
 - [ ] UnBind CCommand
 - [ ] Rendering Library
