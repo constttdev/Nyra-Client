@@ -1,5 +1,7 @@
 package de.constt.nyra.client.mixins;
 
+import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.roots.modules.misc.ClickGUIModule;
 import de.constt.nyra.client.screens.ModulesScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -28,8 +30,7 @@ public class TitleScreenMixin extends Screen {
     @Inject(method = "init", at = @At("RETURN"))
     public void render(CallbackInfo ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Modules Screen"), (button) -> {
-            //~ if <=1.21.10 setScreenAndShow -> setScreen
-            Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
+            ModuleManager.toggle(ClickGUIModule.class);
         }).bounds(this.width - 75 - 3, 3, 70, 20).build());
     }
 }

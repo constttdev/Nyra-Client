@@ -2,6 +2,8 @@ package de.constt.nyra.client.clientcommands.utils;
 
 import de.constt.nyra.client.annotations.CommandInfoAnnotation;
 import de.constt.nyra.client.roots.implementations.CommandImplementation;
+import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.roots.modules.misc.ClickGUIModule;
 import de.constt.nyra.client.screens.ModulesScreen;
 import net.minecraft.client.Minecraft;
 
@@ -15,8 +17,7 @@ public class ClickGuiCommand extends CommandImplementation {
         super.executeCommand(parts);
 
         Minecraft.getInstance().execute(() -> {
-            //~ if <=1.21.10 setScreenAndShow -> setScreen
-            Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
+            ModuleManager.toggle(ClickGUIModule.class);
         });
     }
 }
