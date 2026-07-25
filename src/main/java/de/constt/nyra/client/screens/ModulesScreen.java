@@ -4,6 +4,7 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.SettingImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.roots.modules.misc.ClickGUIModule;
 import de.constt.nyra.client.utils.ConfigManagerUtils;
 import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import imgui.ImGui;
@@ -109,7 +110,19 @@ public class ModulesScreen extends BaseScreen {
             label += " [ON]";
         }
 
-        if (ImGui.button(label, ImGui.getContentRegionAvailX() - 80, 32)) {
+        boolean moduleClicked = ImGui.button(
+                label,
+                ImGui.getContentRegionAvailX() - 80,
+                32
+        );
+
+        if (ImGui.isItemClicked(1)) {
+            if (expanded) {
+                expandedModules.remove(module);
+            } else {
+                expandedModules.add(module);
+            }
+        } else if (moduleClicked) {
             module.toggle();
         }
 
@@ -137,14 +150,6 @@ public class ModulesScreen extends BaseScreen {
 
         if (isListening) {
             ImGui.popStyleColor();
-        }
-
-        if (ImGui.isItemClicked(1)) {
-            if (expanded) {
-                expandedModules.remove(module);
-            } else {
-                expandedModules.add(module);
-            }
         }
 
         if (expanded) {
@@ -225,5 +230,16 @@ public class ModulesScreen extends BaseScreen {
             case GLFW.GLFW_KEY_F12          -> "[F12]";
             default -> "[KEY:" + key + "]";
         };
+    }
+
+    @Override
+    public void removed() {
+        super.removed();
+
+        ClickGUIModule module = ModuleManager.getModule(ClickGUIModule.class);
+
+        if (module != null && module.isEnabled()) {
+            module.toggle();
+        }
     }
 }
