@@ -11,14 +11,20 @@ public class ClickGUIModule extends ModuleImplementation {
     @Override
     public void onEnable() {
         super.onEnable();
-        //~ if <=1.21.10 setScreenAndShow -> setScreen
+
+        if (Minecraft.getInstance().gui.screen() instanceof ModulesScreen) {
+            return;
+        }
+
         Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
     }
 
     @Override
     public void onDisable() {
         super.onDisable();
-        //~ if <=1.21.10 setScreenAndShow -> setScreen
-        Minecraft.getInstance().setScreenAndShow(null);
+
+        if (Minecraft.getInstance().gui.screen() instanceof ModulesScreen) {
+            Minecraft.getInstance().setScreenAndShow(null);
+        }
     }
 }
