@@ -4,6 +4,7 @@ import com.jagrosh.discordipc.IPCClient;
 import de.constt.nyra.client.clientcommands.CCommandManager;
 import de.constt.nyra.client.discordRpc.DiscordIPCCore;
 import de.constt.nyra.client.managers.EventManager;
+import de.constt.nyra.client.payloads.PayloadManager;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.utils.ImGuiStyleUtils;
 import de.constt.nyra.client.utils.InstanceUtils;
@@ -23,6 +24,9 @@ public class NyraMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("Nyra {} for MC {} initializing...", VERSION, MINECRAFT);
+
+        // -- Payloads --
+        PayloadManager.init();
 
         // -- Variable Setting --
         MessageUtils.setPrefix(Component.literal("Nyra"));

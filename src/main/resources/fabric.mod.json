@@ -3,7 +3,7 @@
   "id": "${id}",
   "version": "${version}",
   "name": "${name}",
-  "description": "Nyra client is an cheating client focused on open sourcing, security and contributions from the community",
+  "description": "Nyra client is a utility mod focused on open sourcing, security and contributions from the community",
   "authors": [
     "constt"
   ],
@@ -26,10 +26,5 @@
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}"
-  },
-  "jars": [
-    {
-      "file": "META-INF/jars/DiscordIPC-0.10.2.jar"
-    }
-  ]
+  }
 }

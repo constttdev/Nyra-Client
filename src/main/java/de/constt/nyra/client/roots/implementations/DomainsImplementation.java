@@ -4,13 +4,12 @@ import java.net.IDN;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class DomainsImplementation {
-    private static final List<String> DOMAINS = new ArrayList<>();
-
-    public static void init() {
-        DOMAINS.add("play.6b6t.org");
-    }
+    private static final Set<String> DOMAINS = Set.of(
+            "*.6b6t.org"
+    );
 
     public static boolean contains(String input) {
         String domain = normalizeHost(input);

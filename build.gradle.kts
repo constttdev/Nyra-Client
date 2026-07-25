@@ -58,13 +58,14 @@ dependencies {
         add("include", dep)
     }
 
-    // Discord IPC - LOCAL JAR ONLY (jagrosh is not on any Maven repo)
-    implementation(files(rootProject.file("lib/DiscordIPC-0.10.2.jar")))
+    // Discord IPC
+    val discordIpc = files(rootProject.file("lib/DiscordIPC-0.10.2.jar"))
+    implementation(discordIpc)
 
     // Junixsocket
-    implementation("com.kohlschutter.junixsocket:junixsocket-common:2.10.1")
-    implementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.10.1")
-    implementation("com.kohlschutter.junixsocket:junixsocket-core:2.10.1")
+    includeImplementation("com.kohlschutter.junixsocket:junixsocket-common:2.10.1")
+    includeImplementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.10.1")
+    includeImplementation("com.kohlschutter.junixsocket:junixsocket-core:2.10.1")
 
     // IMGUI
     include("foundry.imguimc:imguimc-fabric-${sc.properties.rawOrNull("mod", "imgui_mc_version")}:${sc.properties.rawOrNull("mod", "imgui_version")}")
@@ -134,4 +135,9 @@ tasks {
         from(loomx.modJar.map { it.archiveFile }, loomx.modSourcesJar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     }
+}
+
+tasks.jar {
+    from(zipTree(rootProject.file("lib/DiscordIPC-0.10.2.jar")))
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
