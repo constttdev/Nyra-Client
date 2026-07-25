@@ -1,5 +1,7 @@
 package de.constt.nyra.client.screens;
 
+import de.constt.nyra.client.panels.ClickGUIPanel;
+import de.constt.nyra.client.panels.FriendsPanel;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.SettingImplementation;
@@ -8,17 +10,74 @@ import de.constt.nyra.client.roots.modules.misc.ClickGUIModule;
 import de.constt.nyra.client.utils.ConfigManagerUtils;
 import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import imgui.ImGui;
+import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiStyleVar;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-public class ModulesScreen extends BaseScreen {
+public class ClickGUIScreen extends BaseScreen {
 
     private final Set<ModuleImplementation> expandedModules = new HashSet<>();
     private ModuleImplementation listeningModule = null;
+
+    private final Map<String, float[]> windowPositions = new HashMap<>();
+
+    private final ClickGUIPanel[] panels = {
+            new FriendsPanel()
+    };
+
+    private void renderWindowPosition(String name, float defaultX, float defaultY, float width, float height) {
+
+        float[] pos = windowPositions.computeIfAbsent(
+                name,
+                k -> new float[]{defaultX, defaultY}
+        );
+
+        ImGui.setNextWindowPos(
+                pos[0],
+                pos[1],
+                ImGuiCond.FirstUseEver
+        );
+
+        ImGui.setNextWindowSize(
+                width,
+                height,
+                ImGuiCond.FirstUseEver
+        );
+    }
+
+    private void updateWindowPosition(String name, float screenWidth, float screenHeight) {
+
+        float[] pos = windowPositions.computeIfAbsent(
+                name,
+                k -> new float[]{0, 0}
+        );
+
+        float x = ImGui.getWindowPosX();
+        float y = ImGui.getWindowPosY();
+
+        float width = ImGui.getWindowWidth();
+        float height = ImGui.getWindowHeight();
+
+        pos[0] = x;
+        pos[1] = y;
+
+        boolean fullyOutside =
+                x + width < 0 ||
+                        y + height < 0 ||
+                        x > screenWidth ||
+                        y > screenHeight;
+
+        if (fullyOutside) {
+            pos[0] = (screenWidth - width) / 2;
+            pos[1] = (screenHeight - height) / 2;
+        }
+    }
 
     @Override
     public void render() {
@@ -56,12 +115,10 @@ public class ModulesScreen extends BaseScreen {
 
         for (CategoryImplementation.Categories category : CategoryImplementation.Categories.values()) {
 
-            ImGui.setNextWindowPos(
+            renderWindowPosition(
+                    category.name(),
                     spacing + index * (width + spacing),
-                    60
-            );
-
-            ImGui.setNextWindowSize(
+                    60,
                     width,
                     height
             );
@@ -70,7 +127,6 @@ public class ModulesScreen extends BaseScreen {
 
             if (ImGui.begin(
                     category.name(),
-                            imgui.flag.ImGuiWindowFlags.NoResize |
                             imgui.flag.ImGuiWindowFlags.NoCollapse
             )) {
 
@@ -94,7 +150,38 @@ public class ModulesScreen extends BaseScreen {
 
             ImGui.end();
 
+            updateWindowPosition(
+                    category.name(),
+                    screenWidth,
+                    screenHeight
+            );
+
             ImGui.popStyleVar();
+
+            index++;
+        }
+
+        for (ClickGUIPanel panel : panels) {
+
+            renderWindowPosition(
+                    panel.getName(),
+                    spacing + index * (width + spacing),
+                    60,
+                    width,
+                    height
+            );
+
+            panel.render(
+                    windowPositions,
+                    screenWidth,
+                    screenHeight
+            );
+
+            updateWindowPosition(
+                    panel.getName(),
+                    screenWidth,
+                    screenHeight
+            );
 
             index++;
         }

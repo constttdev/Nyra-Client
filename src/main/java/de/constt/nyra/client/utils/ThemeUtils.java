@@ -19,7 +19,7 @@ public final class ThemeUtils {
 
     private static final Path DEFAULT_THEME = THEMES_DIR.resolve("default.cfg");
 
-    private static final int DEFAULT_BG = 0x23484848;
+    private static final int DEFAULT_BG = 0xFF1F1F1F;
     private static final int DEFAULT_SECONDARY = 0xFF505050;
     private static final int DEFAULT_ACCENT = 0xFF6B6B6B;
     private static final int DEFAULT_TEXT = 0xFFF2F2F2;

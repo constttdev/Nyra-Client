@@ -5,11 +5,18 @@ import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.settings.ColorSettingImplementation;
 import de.constt.nyra.client.roots.implementations.settings.ListSettingImplementation;
-import de.constt.nyra.client.screens.ModulesScreen;
+import de.constt.nyra.client.screens.ClickGUIScreen;
+import de.constt.nyra.client.utils.FriendUtils;
+import de.constt.nyra.client.utils.PlayerUtils;
+import de.constt.nyra.client.utils.SkinUtils;
 import de.constt.nyra.client.utils.ThemeUtils;
 import imgui.ImGui;
 import imgui.type.ImString;
 import net.minecraft.client.Minecraft;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ModuleInfoAnnotation(
         name = "Click GUI",
@@ -18,7 +25,6 @@ import net.minecraft.client.Minecraft;
         internalModuleName = "clickgui"
 )
 public class ClickGUIModule extends ModuleImplementation {
-
     private final ImString newThemeName = new ImString(64);
 
     private final ListSettingImplementation themeSetting =
@@ -90,11 +96,11 @@ public class ClickGUIModule extends ModuleImplementation {
         super.onEnable();
 
         //~ if <=1.21.11 || 26.1 || 26.1.1 || 26.1.2 '.gui.screen()' -> '.screen'
-        if (Minecraft.getInstance().gui.screen() instanceof ModulesScreen)
+        if (Minecraft.getInstance().gui.screen() instanceof ClickGUIScreen)
             return;
 
         //~ if <=1.21.10 'setScreenAndShow' -> 'setScreen'
-        Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
+        Minecraft.getInstance().setScreenAndShow(new ClickGUIScreen());
     }
 
     @Override
@@ -102,13 +108,15 @@ public class ClickGUIModule extends ModuleImplementation {
         super.onDisable();
 
         //~ if <=1.21.11 || 26.1 || 26.1.1 || 26.1.2 '.gui.screen()' -> '.screen'
-        if (Minecraft.getInstance().gui.screen() instanceof ModulesScreen)
+        if (Minecraft.getInstance().gui.screen() instanceof ClickGUIScreen)
             //~ if <=1.21.10 'setScreenAndShow' -> 'setScreen'
             Minecraft.getInstance().setScreenAndShow(null);
     }
 
     @Override
     public void renderCustomSettings() {
+
+        ImGui.text("Theming");
 
         themeSetting.setOptions(
                 ThemeUtils.listThemes().toArray(new String[0])

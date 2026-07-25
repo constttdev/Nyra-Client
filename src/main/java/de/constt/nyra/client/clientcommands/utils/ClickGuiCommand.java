@@ -4,7 +4,6 @@ import de.constt.nyra.client.annotations.CommandInfoAnnotation;
 import de.constt.nyra.client.roots.implementations.CommandImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.roots.modules.misc.ClickGUIModule;
-import de.constt.nyra.client.screens.ModulesScreen;
 import net.minecraft.client.Minecraft;
 
 

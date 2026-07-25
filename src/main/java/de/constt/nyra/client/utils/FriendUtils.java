@@ -101,7 +101,7 @@ public class FriendUtils {
             }
 
             try {
-                FileUtils.appendLine(FILE, uuid.toString());
+                FileUtils.appendLine(FILE, uuid + "=" + username);
                 sendMessage(() -> MessageUtils.sendCSMessageNeutral(
                         "You added §e" + username + "§a as a friend!"));
             } catch (IOException e) {
@@ -116,30 +116,21 @@ public class FriendUtils {
      * Removes {@code username} from the friends list.
      * Delegates the line removal and file rewrite to {@link FileUtils#removeLine}.
      */
-    public static void removeFriend(String username) {
+    public static void removeFriend(UUID uuid) {
         new Thread(() -> {
-            UUID uuid = resolveUUID(username);
-
-            if (uuid == null) {
-                sendMessage(() -> MessageUtils.sendCSMessageError(
-                        "Couldn't resolve §e" + username + "§c – are they a real player, or are Mojang servers down?"));
-                return;
-            }
-
-            if (!isFriendByUUID(uuid)) {
-                sendMessage(() -> MessageUtils.sendCSMessageError(
-                        "§e" + username + "§c is not on your friends list."));
-                return;
-            }
-
             try {
-                FileUtils.removeLine(FILE, uuid.toString());
+                List<String> lines = FileUtils.readLines(FILE);
+
+                lines.removeIf(line -> line.equals(uuid.toString()) || line.startsWith(uuid.toString() + "="));
+
+                FileUtils.writeLines(FILE, lines);
+
                 sendMessage(() -> MessageUtils.sendCSMessageNeutral(
-                        "You removed §e" + username + "§c from your friends list."));
+                        "Friend removed."));
             } catch (IOException e) {
-                System.err.println("[FriendUtils] Failed to remove friend " + username + ": " + e.getMessage());
+                System.err.println("[FriendUtils] Failed to remove friend: " + e.getMessage());
                 sendMessage(() -> MessageUtils.sendCSMessageError(
-                        "Failed to remove §e" + username + "§c from the friends file."));
+                        "Failed to remove friend."));
             }
         }, "FriendUtils-Remove").start();
     }
@@ -160,7 +151,16 @@ public class FriendUtils {
      * No network call is made — safe to call from any thread.
      */
     public static boolean isFriendByUUID(UUID uuid) {
-        return FileUtils.fileContainsText(FILE, uuid.toString());
+        try {
+            for (String line : FileUtils.readLines(FILE)) {
+                if (line.startsWith(uuid.toString() + "=") || line.equals(uuid.toString())) {
+                    return true;
+                }
+            }
+        } catch (IOException ignored) {
+        }
+
+        return false;
     }
 
     /**
@@ -170,17 +170,20 @@ public class FriendUtils {
     public static List<UUID> getFriendUUIDs() {
         try {
             List<String> lines = FileUtils.readLines(FILE);
-            List<UUID>   uuids = new ArrayList<>(lines.size());
+            List<UUID> uuids = new ArrayList<>();
+
             for (String line : lines) {
                 try {
-                    uuids.add(UUID.fromString(line));
-                } catch (IllegalArgumentException ignored) {
-                    System.err.println("[FriendUtils] Skipping malformed UUID line: \"" + line + "\"");
+                    String uuid = line.split("=")[0];
+                    uuids.add(UUID.fromString(uuid));
+                } catch (Exception ignored) {
+                    System.err.println("[FriendUtils] Invalid friend entry: " + line);
                 }
             }
+
             return Collections.unmodifiableList(uuids);
+
         } catch (IOException e) {
-            System.err.println("[FriendUtils] Failed to read friends file: " + e.getMessage());
             return Collections.emptyList();
         }
     }
@@ -226,5 +229,20 @@ public class FriendUtils {
                 sendMessage(() -> MessageUtils.sendCSMessageError("Failed to clear the friends file."));
             }
         }, "FriendUtils-Clear").start();
+    }
+
+    public static String getFriendName(UUID uuid) {
+        try {
+            for (String line : FileUtils.readLines(FILE)) {
+                String[] split = line.split("=", 2);
+
+                if (split.length == 2 && split[0].equals(uuid.toString())) {
+                    return split[1];
+                }
+            }
+        } catch (IOException ignored) {
+        }
+
+        return uuid.toString().substring(0, 8) + "…";
     }
 }

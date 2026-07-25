@@ -222,7 +222,7 @@ Heres a list of what features are done / still need work
 - [X] Module Manager
 - [X] Theme selecting 
 - [X] Change theme in clickgui (new theme, delete theme, set colors)
-- [ ] Friends
+- [X] Friends
 - [X] Bind Modules
 - [X] Unbind Modules
 - [X] Bind CCommand
