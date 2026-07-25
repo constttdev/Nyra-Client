@@ -17,6 +17,14 @@ public final class ListSettingImplementation extends SettingImplementation<Strin
 
     public void setOptions(String[] options) {
         this.options = options;
+
+        if (options.length > 0 && !contains(value)) {
+            set(options[0]);
+        }
+    }
+
+    public String[] getOptions() {
+        return options;
     }
 
     @Override
@@ -24,16 +32,27 @@ public final class ListSettingImplementation extends SettingImplementation<Strin
         imIndex.set(indexOf(value));
 
         if (ImGui.combo(getName(), imIndex, options)) {
-            value = options[imIndex.get()];
+            set(options[imIndex.get()]);
         }
     }
 
     private int indexOf(String val) {
         for (int i = 0; i < options.length; i++) {
-            if (options[i].equals(val)) return i;
+            if (options[i].equals(val)) {
+                return i;
+            }
         }
+
         return 0;
     }
 
+    private boolean contains(String val) {
+        for (String option : options) {
+            if (option.equals(val)) {
+                return true;
+            }
+        }
 
+        return false;
+    }
 }

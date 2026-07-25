@@ -15,9 +15,6 @@ public final class ColorSettingImplementation extends SettingImplementation<Inte
 
     @Override
     public void renderImGui() {
-
-        unpackToFloat(value, imColor);
-
         if (ImGui.colorEdit4(
                 getName(),
                 imColor,
@@ -27,6 +24,12 @@ public final class ColorSettingImplementation extends SettingImplementation<Inte
         )) {
             set(packFromFloat(imColor));
         }
+    }
+
+    @Override
+    public void set(Integer value) {
+        super.set(value);
+        unpackToFloat(value, imColor);
     }
 
     public float[] getRGBA() {

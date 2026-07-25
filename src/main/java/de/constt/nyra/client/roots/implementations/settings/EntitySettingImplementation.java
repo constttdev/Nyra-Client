@@ -142,7 +142,7 @@ public final class EntitySettingImplementation extends SettingImplementation<Ent
                             }
 
                             if (ImGui.selectable(label, selected)) {
-                                value = entityType;
+                                set(entityType);
                                 ImGui.closeCurrentPopup();
                             }
 
@@ -187,5 +187,10 @@ public final class EntitySettingImplementation extends SettingImplementation<Ent
             case SINGLE -> entity.getType() == value;
             case GROUP -> group.matches(entity);
         };
+    }
+
+    @Override
+    public void set(EntityType<?> value) {
+        super.set(value);
     }
 }

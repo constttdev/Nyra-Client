@@ -25,9 +25,14 @@ public final class DoubleSettingImplementation extends SettingImplementation<Dou
 
     @Override
     public void renderImGui() {
-        imValue.set(value);
         if (ImGui.sliderScalar(getName(), imValue.getData(), min, max, format)) {
-            value = imValue.get();
+            set(imValue.get());
         }
+    }
+
+    @Override
+    public void set(Double value) {
+        super.set(value);
+        imValue.set(value);
     }
 }

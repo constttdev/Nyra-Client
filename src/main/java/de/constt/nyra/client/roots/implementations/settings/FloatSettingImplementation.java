@@ -25,9 +25,14 @@ public final class FloatSettingImplementation extends SettingImplementation<Floa
 
     @Override
     public void renderImGui() {
-        imValue.set(value);
         if (ImGui.sliderFloat(getName(), imValue.getData(), min, max, format)) {
-            value = imValue.get();
+            set(imValue.get());
         }
+    }
+
+    @Override
+    public void set(Float value) {
+        super.set(value);
+        imValue.set(value);
     }
 }

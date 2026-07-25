@@ -1,15 +1,29 @@
 package de.constt.nyra.client.roots.implementations;
 
 import java.net.IDN;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 public class DomainsImplementation {
-    private static final Set<String> DOMAINS = Set.of(
+    private static final Set<String> DOMAINS = new HashSet<>(Set.of(
             "*.6b6t.org"
-    );
+    ));
+
+    public static void addDomain(String domain) {
+        DOMAINS.add(domain);
+    }
+
+    public static void removeDomain(String domain) {
+        DOMAINS.remove(domain);
+    }
+
+    public static void setDomains(Set<String> domains) {
+        DOMAINS.clear();
+        DOMAINS.addAll(domains);
+    }
+
+    public static Set<String> getDomains() {
+        return DOMAINS;
+    }
 
     public static boolean contains(String input) {
         String domain = normalizeHost(input);

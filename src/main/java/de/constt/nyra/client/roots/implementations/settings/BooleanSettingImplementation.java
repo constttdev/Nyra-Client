@@ -16,7 +16,13 @@ public final class BooleanSettingImplementation extends SettingImplementation<Bo
     @Override
     public void renderImGui() {
         if (ImGui.checkbox(getName(), imValue)) {
-            value = imValue.get();
+            set(imValue.get());
         }
+    }
+
+    @Override
+    public void set(Boolean value) {
+        super.set(value);
+        imValue.set(value);
     }
 }

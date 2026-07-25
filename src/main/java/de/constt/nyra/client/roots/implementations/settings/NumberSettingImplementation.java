@@ -19,9 +19,14 @@ public final class NumberSettingImplementation extends SettingImplementation<Int
 
     @Override
     public void renderImGui() {
-        imValue.set(value);
         if (ImGui.sliderInt(getName(), imValue.getData(), min, max)) {
-            value = imValue.get();
+            set(imValue.get());
         }
+    }
+
+    @Override
+    public void set(Integer value) {
+        super.set(value);
+        imValue.set(value);
     }
 }

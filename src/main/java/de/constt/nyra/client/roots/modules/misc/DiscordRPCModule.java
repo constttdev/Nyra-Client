@@ -1,4 +1,5 @@
 package de.constt.nyra.client.roots.modules.misc;
+
 import com.jagrosh.discordipc.entities.ActivityType;
 import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
 import de.constt.nyra.client.discordRpc.DiscordIPCCore;
@@ -7,8 +8,12 @@ import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.settings.ListSettingImplementation;
 import de.constt.nyra.client.roots.implementations.settings.StringSettingImplementation;
 
-
-@ModuleInfoAnnotation(name = "Discord RPC", description = "Toggles Nyra Clients Discord Rich Presence", category = CategoryImplementation.Categories.MISC, internalModuleName = "discordrpc")
+@ModuleInfoAnnotation(
+        name = "Discord RPC",
+        description = "Toggles Nyra Clients Discord Rich Presence",
+        category = CategoryImplementation.Categories.MISC,
+        internalModuleName = "discordrpc"
+)
 public class DiscordRPCModule extends ModuleImplementation {
 
     public final StringSettingImplementation state;
@@ -18,7 +23,11 @@ public class DiscordRPCModule extends ModuleImplementation {
     public DiscordRPCModule() {
         state = new StringSettingImplementation("State", "Being Open-Source");
         details = new StringSettingImplementation("Details", "%mc_version%");
-        activityType = new ListSettingImplementation("Activity Type", new String[]{"Competing", "Listening", "Playing", "Streaming", "Watching"}, "Playing");
+        activityType = new ListSettingImplementation(
+                "Activity Type",
+                new String[]{"Competing", "Listening", "Playing", "Streaming", "Watching"},
+                "Playing"
+        );
 
         registerSetting(state);
         registerSetting(details);

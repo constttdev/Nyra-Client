@@ -55,13 +55,20 @@ public final class BlockSettingImplementation extends SettingImplementation<Bloc
         }
 
         ImGui.setNextWindowSize(340, 480);
+
         if (ImGui.beginPopupModal(
                 "Select Block##block_selector_" + safe(getName()),
                 ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove)) {
 
             ImGui.setNextItemWidth(320);
-            if (ImGui.inputTextWithHint("##search_" + safe(getName()), "Search blocks...", searchBuffer)) {
+
+            if (ImGui.inputTextWithHint(
+                    "##search_" + safe(getName()),
+                    "Search blocks...",
+                    searchBuffer
+            )) {
                 String current = searchBuffer.get();
+
                 if (!current.equals(lastSearch)) {
                     lastSearch = current;
                     updateFilteredBlocks(current);
@@ -70,20 +77,34 @@ public final class BlockSettingImplementation extends SettingImplementation<Bloc
 
             ImGui.separator();
 
-            if (ImGui.beginChild("block_list_" + safe(getName()), 320, 370, false)) {
+            if (ImGui.beginChild(
+                    "block_list_" + safe(getName()),
+                    320,
+                    370,
+                    false
+            )) {
                 List<Block> localList = filteredBlocks;
 
                 if (localList != null) {
                     for (Block block : localList) {
-                        String label = safe(blockName(block)) + "##sel_" + safe(blockName(block)) + "_" + safe(getName());
+                        String label =
+                                safe(blockName(block))
+                                        + "##sel_"
+                                        + safe(blockName(block))
+                                        + "_"
+                                        + safe(getName());
+
                         boolean selected = block == value;
 
                         if (selected) {
-                            ImGui.pushStyleColor(imgui.flag.ImGuiCol.Text, 0xFF55FF55);
+                            ImGui.pushStyleColor(
+                                    imgui.flag.ImGuiCol.Text,
+                                    0xFF55FF55
+                            );
                         }
 
                         if (ImGui.selectable(label, selected)) {
-                            value = block;
+                            set(block);
                             ImGui.closeCurrentPopup();
                         }
 
@@ -116,6 +137,7 @@ public final class BlockSettingImplementation extends SettingImplementation<Bloc
         }
 
         String lower = search.toLowerCase();
+
         filteredBlocks = BuiltInRegistries.BLOCK.stream()
                 .filter(b -> b != Blocks.AIR)
                 .filter(b -> blockName(b).toLowerCase().contains(lower))
@@ -123,7 +145,11 @@ public final class BlockSettingImplementation extends SettingImplementation<Bloc
                 .collect(Collectors.toList());
     }
 
-    public Block getBlock() { return value; }
+    public Block getBlock() {
+        return value;
+    }
 
-    public int getBlockId() { return BuiltInRegistries.BLOCK.getId(value); }
+    public int getBlockId() {
+        return BuiltInRegistries.BLOCK.getId(value);
+    }
 }

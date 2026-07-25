@@ -16,8 +16,9 @@ public final class StringSettingImplementation extends SettingImplementation<Str
     @Override
     public void renderImGui() {
         imValue.set(value);
+
         if (ImGui.inputText(getName(), imValue)) {
-            value = imValue.get();
+            set(imValue.get());
         }
     }
 }
