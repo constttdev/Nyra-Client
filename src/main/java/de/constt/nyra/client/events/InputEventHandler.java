@@ -17,7 +17,9 @@ public class InputEventHandler {
 
     public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            //~ if <1.21.9 '.getWindow().handle()' -> '.getWindow().getWindow()'
             long window = Minecraft.getInstance().getWindow().handle();
+            //~ if <=1.21.11 || >=26.1 '.gui.screen()' -> '.screen'
             Screen screen = Minecraft.getInstance().gui.screen();
 
             for (ModuleImplementation module : ModuleManager.getModules()) {

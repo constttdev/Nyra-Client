@@ -34,6 +34,7 @@ public class ModulesScreen extends BaseScreen {
         int index = 0;
 
         if (listeningModule != null) {
+            //~ if <1.21.9 '.getWindow().handle()' -> '.getWindow().getWindow()'
             long window = Minecraft.getInstance().getWindow().handle();
 
             for (int key = GLFW.GLFW_KEY_SPACE; key <= GLFW.GLFW_KEY_LAST; key++) {

@@ -220,8 +220,8 @@ Heres a list of what modules are done / still need work
 ## Features
 Heres a list of what features are done / still need work
 - [X] Module Manager
-- [ ] Theme selecting 
-- [ ] Change theme in clickgui (new theme, delete theme, set colors)
+- [X] Theme selecting 
+- [X] Change theme in clickgui (new theme, delete theme, set colors)
 - [ ] Friends
 - [X] Bind Modules
 - [X] Unbind Modules

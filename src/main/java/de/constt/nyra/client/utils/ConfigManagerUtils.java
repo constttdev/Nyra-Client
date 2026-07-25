@@ -17,7 +17,7 @@ public class ConfigManagerUtils {
 
     private static final Path CONFIGS_FOLDER =
             FabricLoader.getInstance().getConfigDir()
-                    .resolve("nyra")
+                    .resolve(VarUtils.getModID())
                     .resolve("configs");
 
     private static final Path DEFAULT_CONFIG =

@@ -5,9 +5,10 @@ package de.constt.nyra.client.payloads;
 
 public class JoinPayload {
 
-    public static final Identifier ID = new Identifier("nyra", "join");
+    public static final Identifier ID = new Identifier(VarUtils.getModID(), "join");
 }
 *///?} else {
+import de.constt.nyra.client.utils.VarUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -20,11 +21,11 @@ import net.minecraft.resources.Identifier;
 public class JoinPayload implements CustomPacketPayload {
 
     //? if >=1.21.11 {
-    public static final Identifier ID = Identifier.fromNamespaceAndPath("nyra", "join");
+    public static final Identifier ID = Identifier.fromNamespaceAndPath(VarUtils.getModID(), "join");
     //? } elif >=1.21.7 {
-    /*public static final Identifier ID = Identifier.fromNamespaceAndPath("nyra", "join");
+    /*public static final Identifier ID = Identifier.fromNamespaceAndPath(VarUtils.getModID(), "join");
      *///?} else {
-    /*public static final Identifier ID = Identifier.tryBuild("nyra", "join");
+    /*public static final Identifier ID = Identifier.tryBuild(VarUtils.getModID(), "join");
      *///?}
 
     public static final StreamCodec<FriendlyByteBuf, JoinPayload> CODEC =

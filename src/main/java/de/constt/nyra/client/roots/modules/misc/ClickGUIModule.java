@@ -89,9 +89,11 @@ public class ClickGUIModule extends ModuleImplementation {
     public void onEnable() {
         super.onEnable();
 
+        //~ if <=1.21.11 || 26.1 || 26.1.1 || 26.1.2 '.gui.screen()' -> '.screen'
         if (Minecraft.getInstance().gui.screen() instanceof ModulesScreen)
             return;
 
+        //~ if <=1.21.10 'setScreenAndShow' -> 'setScreen'
         Minecraft.getInstance().setScreenAndShow(new ModulesScreen());
     }
 
@@ -99,7 +101,9 @@ public class ClickGUIModule extends ModuleImplementation {
     public void onDisable() {
         super.onDisable();
 
+        //~ if <=1.21.11 || 26.1 || 26.1.1 || 26.1.2 '.gui.screen()' -> '.screen'
         if (Minecraft.getInstance().gui.screen() instanceof ModulesScreen)
+            //~ if <=1.21.10 'setScreenAndShow' -> 'setScreen'
             Minecraft.getInstance().setScreenAndShow(null);
     }
 
@@ -124,9 +128,11 @@ public class ClickGUIModule extends ModuleImplementation {
 
             if (!name.isEmpty()) {
                 ThemeUtils.saveThemeAs(name);
+
                 themeSetting.setOptions(
                         ThemeUtils.listThemes().toArray(new String[0])
                 );
+
                 newThemeName.set("");
             }
         }
