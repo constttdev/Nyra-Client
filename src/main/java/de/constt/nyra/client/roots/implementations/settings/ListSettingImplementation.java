@@ -6,13 +6,17 @@ import imgui.type.ImInt;
 
 public final class ListSettingImplementation extends SettingImplementation<String> {
 
-    private final String[] options;
+    private String[] options;
     private final ImInt imIndex;
 
     public ListSettingImplementation(String name, String[] options, String defaultValue) {
         super(name, defaultValue);
         this.options = options;
         this.imIndex = new ImInt(indexOf(defaultValue));
+    }
+
+    public void setOptions(String[] options) {
+        this.options = options;
     }
 
     @Override
@@ -24,11 +28,12 @@ public final class ListSettingImplementation extends SettingImplementation<Strin
         }
     }
 
-    /** Returns the selected option index, or 0 if not found. */
     private int indexOf(String val) {
         for (int i = 0; i < options.length; i++) {
             if (options[i].equals(val)) return i;
         }
         return 0;
     }
+
+
 }
