@@ -1,9 +1,6 @@
 package de.constt.nyra.client.managers;
 
-import de.constt.nyra.client.events.ClientPlayerConnectionEventsEvent;
-import de.constt.nyra.client.events.ClientSendMessageEvent;
-import de.constt.nyra.client.events.ClientTickEventsEvent;
-import de.constt.nyra.client.events.InputEventHandler;
+import de.constt.nyra.client.events.*;
 
 public class EventManager {
     public static void registerEvents() {
@@ -11,5 +8,9 @@ public class EventManager {
         ClientPlayerConnectionEventsEvent.register();
         ClientTickEventsEvent.register();
         InputEventHandler.register();
+
+        // RENDERING PIPELINE
+        LevelExtractionEventsEvent.register();
+        LayerRenderEventsEvent.register();
     }
 }
