@@ -3,12 +3,15 @@ package de.constt.nyra.client;
 import com.jagrosh.discordipc.IPCClient;
 import de.constt.nyra.client.clientcommands.CCommandManager;
 import de.constt.nyra.client.discordRpc.DiscordIPCCore;
+import de.constt.nyra.client.libs.render.CustomRenderingPipeline;
 import de.constt.nyra.client.managers.EventManager;
 import de.constt.nyra.client.payloads.PayloadManager;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.utils.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -45,6 +48,14 @@ public class NyraMod implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> client.getWindow().setTitle(title));
 
+
+        LevelExtractionEvents.END_EXTRACTION.register(
+                CustomRenderingPipeline::extractRenders
+        );
+
+        LevelRenderEvents.AFTER_TRANSLUCENT_TERRAIN.register(
+                CustomRenderingPipeline::renderAndDraw
+        );
     }
 
     /**

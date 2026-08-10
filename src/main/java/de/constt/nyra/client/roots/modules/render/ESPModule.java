@@ -1,24 +1,35 @@
 package de.constt.nyra.client.roots.modules.render;
+
 import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
 import de.constt.nyra.client.libs.render.CustomRenderingPipeline;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.settings.ColorSettingImplementation;
 import de.constt.nyra.client.roots.implementations.settings.EntitySettingImplementation;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 
-
-@ModuleInfoAnnotation(name = "ESP", description = "Displays esp information on screen.", category = CategoryImplementation.Categories.RENDER, internalModuleName = "esp")
+@ModuleInfoAnnotation(
+        name = "ESP",
+        description = "Displays esp information on screen.",
+        category = CategoryImplementation.Categories.RENDER,
+        internalModuleName = "esp"
+)
 public class ESPModule extends ModuleImplementation {
-    public EntitySettingImplementation entitySetting = new EntitySettingImplementation("Entity", EntityTypes.ZOMBIE);
-    public ColorSettingImplementation colorSetting = new ColorSettingImplementation("ESP Color", 0xFF1C1C1C);
+
+    public EntitySettingImplementation entitySetting =
+            new EntitySettingImplementation("Entity", EntityTypes.ZOMBIE);
+
+    public ColorSettingImplementation colorSetting =
+            new ColorSettingImplementation("ESP Color", 0xFF1C1C1C);
 
     public ESPModule() {
         registerSetting(entitySetting);
         registerSetting(colorSetting);
+
+        LevelExtractionEvents.END_EXTRACTION.register(context -> render());
     }
 
     private void render() {
