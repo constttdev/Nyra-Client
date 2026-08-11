@@ -70,6 +70,7 @@ public class ModuleManager {
 
         // -- MISC --
         MODULES.add(new ClickGUIModule());
+        MODULES.add(new PearlThrowModule());
         // MODULES.add(new AntiSpamModule());
         // MODULES.add(new ArmorDurabilityModule());
         // MODULES.add(new ArrayListModule());
