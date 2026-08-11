@@ -1,6 +1,7 @@
 package de.constt.nyra.client.utils;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class InventoryUtils {
@@ -33,5 +34,24 @@ public class InventoryUtils {
         }
 
         return -1; // not found in hotbar
+    }
+
+    public static boolean hasItemInHotbar(Item item) {
+        if (Minecraft.getInstance().player == null) {
+            return false;
+        }
+
+        for (int slot = 0; slot < 9; slot++) {
+            ItemStack stack = Minecraft.getInstance()
+                    .player
+                    .getInventory()
+                    .getItem(slot);
+
+            if (stack.is(item)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
