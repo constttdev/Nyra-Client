@@ -41,33 +41,22 @@ public class ModuleCacheUtils {
     }
 
     public static void loadAll() {
-        System.out.println("[Nyra] ModuleCacheUtils.loadAll()");
-
         List<ModuleData> dataList = CacheUtils.load(
                 CACHE_FILENAME,
                 MODULE_DATA_LIST_TYPE,
                 ArrayList::new
         );
 
-        System.out.println("[Nyra] Saved modules: " + dataList.size());
-        System.out.println("[Nyra] Registered modules: " + ModuleManager.getModules().size());
-
         if (dataList.isEmpty()) {
-            System.out.println("[Nyra] No saved module data found");
             return;
         }
 
         for (ModuleData data : dataList) {
-            System.out.println("[Nyra] Loading module: " + data.name);
-
             ModuleImplementation module = findModuleByName(data.name);
 
             if (module == null) {
-                System.out.println("[Nyra] Module not found: " + data.name);
                 continue;
             }
-
-            System.out.println("[Nyra] Found module: " + module.getTranslatableText());
 
             boolean shouldBeEnabled = data.enabled;
 
@@ -128,38 +117,16 @@ public class ModuleCacheUtils {
 
     private static void applySettings(ModuleImplementation module, Map<String, JsonElement> settingsMap) {
         for (Map.Entry<String, JsonElement> entry : settingsMap.entrySet()) {
-            System.out.println("[Nyra] Loading setting: " + entry.getKey() + " = " + entry.getValue());
-
             SettingImplementation<?> setting = module.getSetting(entry.getKey());
 
             if (setting == null) {
-                System.out.println("[Nyra] Setting NOT FOUND: " + entry.getKey());
                 continue;
             }
 
-            System.out.println(
-                    "[Nyra] Found setting: " +
-                            setting.getName() +
-                            " current=" +
-                            setting.get()
-            );
-
             try {
                 applySettingValue(setting, entry.getValue());
-
-                System.out.println(
-                        "[Nyra] Applied setting: " +
-                                setting.getName() +
-                                " new=" +
-                                setting.get()
-                );
             } catch (Exception e) {
-                System.err.println(
-                        "[Nyra] Failed to apply setting " +
-                                entry.getKey() +
-                                ": " +
-                                e.getMessage()
-                );
+                System.err.println(e.getMessage());
             }
         }
     }

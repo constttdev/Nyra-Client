@@ -26,6 +26,7 @@ public class NyraMod implements ClientModInitializer {
     public void onInitializeClient() {
         LOGGER.info("Nyra {} for MC {} initializing...", VERSION, MINECRAFT);
 
+
         // -- Payloads --
         PayloadManager.init();
 
@@ -38,6 +39,9 @@ public class NyraMod implements ClientModInitializer {
         // -- Modules --
         ModuleManager.init();
 
+        // -- Rendering --
+        CustomRenderingPipeline.register();
+
         // -- Commands --
         CCommandManager.init();
 
@@ -47,15 +51,6 @@ public class NyraMod implements ClientModInitializer {
         String title = "Nyra | CL V. " + VERSION + " | MC V. " + MINECRAFT + " | #" + InstanceUtils.getInstanceId();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> client.getWindow().setTitle(title));
-
-
-        LevelExtractionEvents.END_EXTRACTION.register(
-                CustomRenderingPipeline::extractRenders
-        );
-
-        LevelRenderEvents.AFTER_TRANSLUCENT_TERRAIN.register(
-                CustomRenderingPipeline::renderAndDraw
-        );
     }
 
     /**

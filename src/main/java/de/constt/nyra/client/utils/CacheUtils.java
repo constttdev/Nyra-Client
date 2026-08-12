@@ -45,8 +45,6 @@ public class CacheUtils {
 
             String json = GSON.toJson(data);
             Files.writeString(file, json);
-
-            System.out.println("[Scalare] Saved cache: " + file.toAbsolutePath());
         } catch (IOException e) {
             System.err.println("Failed to save cache " + filename + ": " + e.getMessage());
             e.printStackTrace();
@@ -62,7 +60,6 @@ public class CacheUtils {
 
         try {
             String content = Files.readString(file);
-            System.out.println("[Scalare] Loaded cache: " + file.toAbsolutePath());
             return GSON.fromJson(content, type);
         } catch (Exception e) {
             System.err.println("Failed to load cache " + filename + ": " + e.getMessage());

@@ -28,7 +28,6 @@ public abstract class SettingImplementation<T> {
         // Only trigger if value actually changes
         if (!Objects.equals(this.value, value)) {
             this.value = value;
-            System.out.println("Setting changed");
             notifyChangeListeners();
         }
     }

@@ -8,7 +8,6 @@ import de.constt.nyra.client.roots.implementations.settings.ColorSettingImplemen
 import de.constt.nyra.client.roots.implementations.settings.EntitySettingImplementation;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityTypes;
 
 @ModuleInfoAnnotation(
@@ -39,26 +38,28 @@ public class ESPModule extends ModuleImplementation {
 
         Minecraft mc = Minecraft.getInstance();
 
-        if (mc.level == null) {
+        if (mc.level == null || mc.player == null) {
             return;
         }
 
         float[] rgba = colorSetting.getRGBA();
 
-        for (Entity entity : mc.level.entitiesForRendering()) {
+        for (var entity : mc.level.entitiesForRendering()) {
             if (entity == mc.player) {
                 continue;
             }
 
-            if (entitySetting.matches(entity)) {
-                CustomRenderingPipeline.addEntity(
-                        entity,
-                        rgba[0],
-                        rgba[1],
-                        rgba[2],
-                        rgba[3]
-                );
+            if (!entitySetting.matches(entity)) {
+                continue;
             }
+
+            CustomRenderingPipeline.addEntity(
+                    entity,
+                    rgba[0],
+                    rgba[1],
+                    rgba[2],
+                    rgba[3]
+            );
         }
     }
 }

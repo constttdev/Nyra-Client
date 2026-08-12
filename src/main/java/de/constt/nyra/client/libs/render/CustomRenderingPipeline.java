@@ -12,7 +12,9 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import de.constt.nyra.client.utils.VarUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext;
+import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.StagedVertexBuffer;
@@ -127,7 +129,9 @@ public class CustomRenderingPipeline {
 
         VertexFormat formatBinding = renderPipeline.getVertexFormatBinding(0);
 
-        assert formatBinding != null;
+        if (formatBinding == null) {
+            return;
+        }
 
         PrimitiveTopology primitive = renderPipeline.getPrimitiveTopology();
 
@@ -150,6 +154,7 @@ public class CustomRenderingPipeline {
         }
 
         stagedBuffer.endFrame();
+        renderState.clear();
     }
 
     private static void renderBoxes(
@@ -289,5 +294,9 @@ public class CustomRenderingPipeline {
 
     public static void close() {
         stagedBuffer.close();
+    }
+
+    public static void register() {
+        LevelRenderEvents.END_MAIN.register(CustomRenderingPipeline::renderAndDraw);
     }
 }

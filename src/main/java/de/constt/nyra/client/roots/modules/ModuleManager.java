@@ -25,6 +25,8 @@ public class ModuleManager {
 
         // MODULES
 
+
+
         // -- COMBAT --
         // MODULES.add(new AimAssistModule());
         // MODULES.add(new AnchorAuraModule());
@@ -187,7 +189,7 @@ public class ModuleManager {
         // MODULES.add(new ChamsModule());
         // MODULES.add(new CustomCrosshairModule());
         // MODULES.add(new CustomHitSoundsModule());
-        // MODULES.add(new ESPModule());
+        MODULES.add(new ESPModule());
         // MODULES.add(new EntityOwnerModule());
         // MODULES.add(new FreeLookModule());
         // MODULES.add(new FreecamModule());
