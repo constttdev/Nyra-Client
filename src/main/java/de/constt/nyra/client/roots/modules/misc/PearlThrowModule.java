@@ -69,6 +69,9 @@ public class PearlThrowModule extends ModuleImplementation {
             return;
         }
 
+        int previousSlot =
+                mc.player.getInventory().getSelectedSlot();
+
         for (int slot = 0; slot < 9; slot++) {
 
             ItemStack stack =
@@ -78,26 +81,12 @@ public class PearlThrowModule extends ModuleImplementation {
                 continue;
             }
 
-            int previousSlot =
-                    mc.player.getInventory().getSelectedSlot();
-
-            /*
-             * Auto swap enabled:
-             * Switch to the pearl slot before throwing.
-             */
-            if (autoswap.get()) {
-                mc.player.getInventory().setSelectedSlot(slot);
+            if (!autoswap.get() && previousSlot != slot) {
+                return;
             }
 
-            /*
-             * Auto swap disabled:
-             * Only throw if the pearl is already selected.
-             */
-            if (
-                    !autoswap.get() &&
-                            previousSlot != slot
-            ) {
-                return;
+            if (autoswap.get()) {
+                mc.player.getInventory().setSelectedSlot(slot);
             }
 
             mc.gameMode.useItem(
@@ -105,17 +94,23 @@ public class PearlThrowModule extends ModuleImplementation {
                     InteractionHand.MAIN_HAND
             );
 
-            /*
-             * Only return to the previous slot if
-             * both settings are enabled.
-             */
-            if (
-                    autoswap.get() &&
-                            swapBackToSlot.get()
-            ) {
-                mc.player.getInventory().setSelectedSlot(
-                        previousSlot
-                );
+            if (autoswap.get() && swapBackToSlot.get()) {
+                long delay = slotSwapDelay.get().longValue();
+
+                Thread.startVirtualThread(() -> {
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
+
+                    mc.execute(() -> {
+                        if (mc.player != null) {
+                            mc.player.getInventory().setSelectedSlot(previousSlot);
+                        }
+                    });
+                });
             }
 
             return;

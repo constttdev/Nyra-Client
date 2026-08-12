@@ -41,19 +41,36 @@ public class ModuleCacheUtils {
     }
 
     public static void loadAll() {
+        System.out.println("[Nyra] ModuleCacheUtils.loadAll()");
+
         List<ModuleData> dataList = CacheUtils.load(
                 CACHE_FILENAME,
                 MODULE_DATA_LIST_TYPE,
                 ArrayList::new
         );
 
-        if (dataList.isEmpty()) return;
+        System.out.println("[Nyra] Saved modules: " + dataList.size());
+        System.out.println("[Nyra] Registered modules: " + ModuleManager.getModules().size());
+
+        if (dataList.isEmpty()) {
+            System.out.println("[Nyra] No saved module data found");
+            return;
+        }
 
         for (ModuleData data : dataList) {
+            System.out.println("[Nyra] Loading module: " + data.name);
+
             ModuleImplementation module = findModuleByName(data.name);
-            if (module == null) continue;
+
+            if (module == null) {
+                System.out.println("[Nyra] Module not found: " + data.name);
+                continue;
+            }
+
+            System.out.println("[Nyra] Found module: " + module.getTranslatableText());
 
             boolean shouldBeEnabled = data.enabled;
+
             if (shouldBeEnabled && !module.getEnabledStatus()) {
                 module.toggle();
             } else if (!shouldBeEnabled && module.getEnabledStatus()) {
@@ -111,13 +128,38 @@ public class ModuleCacheUtils {
 
     private static void applySettings(ModuleImplementation module, Map<String, JsonElement> settingsMap) {
         for (Map.Entry<String, JsonElement> entry : settingsMap.entrySet()) {
+            System.out.println("[Nyra] Loading setting: " + entry.getKey() + " = " + entry.getValue());
+
             SettingImplementation<?> setting = module.getSetting(entry.getKey());
-            if (setting == null) continue;
+
+            if (setting == null) {
+                System.out.println("[Nyra] Setting NOT FOUND: " + entry.getKey());
+                continue;
+            }
+
+            System.out.println(
+                    "[Nyra] Found setting: " +
+                            setting.getName() +
+                            " current=" +
+                            setting.get()
+            );
 
             try {
                 applySettingValue(setting, entry.getValue());
+
+                System.out.println(
+                        "[Nyra] Applied setting: " +
+                                setting.getName() +
+                                " new=" +
+                                setting.get()
+                );
             } catch (Exception e) {
-                System.err.println("Failed to apply setting " + entry.getKey() + ": " + e.getMessage());
+                System.err.println(
+                        "[Nyra] Failed to apply setting " +
+                                entry.getKey() +
+                                ": " +
+                                e.getMessage()
+                );
             }
         }
     }
@@ -125,24 +167,26 @@ public class ModuleCacheUtils {
     @SuppressWarnings("unchecked")
     private static <T> void applySettingValue(SettingImplementation<T> setting, JsonElement value) {
         Object currentValue = setting.get();
-        T newValue = null;
 
         if (currentValue instanceof Boolean) {
-            newValue = (T) Boolean.valueOf(value.getAsBoolean());
+            setting.set((T) Boolean.valueOf(value.getAsBoolean()));
         } else if (currentValue instanceof Integer) {
-            newValue = (T) Integer.valueOf(value.getAsInt());
+            setting.set((T) Integer.valueOf(value.getAsInt()));
         } else if (currentValue instanceof Double) {
-            newValue = (T) Double.valueOf(value.getAsDouble());
+            setting.set((T) Double.valueOf(value.getAsDouble()));
         } else if (currentValue instanceof Float) {
-            newValue = (T) Float.valueOf(value.getAsFloat());
-        } else if (currentValue instanceof String) {
-            newValue = (T) value.getAsString();
+            setting.set((T) Float.valueOf(value.getAsFloat()));
         } else if (currentValue instanceof Long) {
-            newValue = (T) Long.valueOf(value.getAsLong());
-        }
-
-        if (newValue != null) {
-            ((SettingImplementation<T>) setting).set(newValue);
+            setting.set((T) Long.valueOf(value.getAsLong()));
+        } else if (currentValue instanceof String) {
+            setting.set((T) value.getAsString());
+        } else {
+            System.err.println(
+                    "Unsupported setting type for " +
+                            setting.getName() +
+                            ": " +
+                            (currentValue == null ? "null" : currentValue.getClass().getName())
+            );
         }
     }
 

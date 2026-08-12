@@ -34,7 +34,7 @@ public abstract class ModuleImplementation {
     }
 
     public SettingImplementation<?> getSetting(String name) {
-        return settings.get(name.toUpperCase());
+        return settings.get(name);
     }
 
     public Collection<SettingImplementation<?>> getSettings() {

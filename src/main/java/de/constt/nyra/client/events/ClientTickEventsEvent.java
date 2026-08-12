@@ -31,7 +31,7 @@ public class ClientTickEventsEvent {
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (!loaded && client.player != null) {
+            if (!loaded) {
                 ModuleCacheUtils.loadAll();
                 loaded = true;
             }
