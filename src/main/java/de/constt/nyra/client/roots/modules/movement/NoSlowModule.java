@@ -10,7 +10,7 @@ public class NoSlowModule extends ModuleImplementation {
     BooleanSettingImplementation cobWeb = new BooleanSettingImplementation("Cobweb", true);
     BooleanSettingImplementation soulSand = new BooleanSettingImplementation("Soulsand", true);
     BooleanSettingImplementation slowness = new BooleanSettingImplementation("Slowness", true);
-    BooleanSettingImplementation hunger = new BooleanSettingImplementation("Hunger", true);
+    // BooleanSettingImplementation hunger = new BooleanSettingImplementation("Hunger", true);
     BooleanSettingImplementation sneaking = new BooleanSettingImplementation("Sneaking", true);
     BooleanSettingImplementation slimeBlock = new BooleanSettingImplementation("Slime Blocks", true);
     BooleanSettingImplementation honeyBlock = new BooleanSettingImplementation("Honey Blocks", true);
@@ -28,4 +28,6 @@ public class NoSlowModule extends ModuleImplementation {
         registerSetting(fluids);
         registerSetting(items);
     }
+
+    // TODO: Make Slowness, Items and Soulsand work in this Module somehow.
 }
