@@ -128,7 +128,7 @@ public class ModuleManager {
         // MODULES.add(new LongJumpModule());
         // MODULES.add(new NoFallModule());
         // MODULES.add(new NoPushModule());
-        // MODULES.add(new NoSlowModule());
+        MODULES.add(new NoSlowModule());
         // MODULES.add(new ParkourModule());
         // MODULES.add(new ReverseStepModule());
         // MODULES.add(new SafeWalkModule());

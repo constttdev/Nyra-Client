@@ -7,10 +7,14 @@
   },
   "client": [
     "GameRendererMixin",
+    "LocalPlayerMixin",
     "SplashManagerMixin",
     "TitleScreenMixin"
   ],
   "mixins": [
-    "BlockedServersMixin"
+    "BlockedServersMixin",
+    "BlockMixin",
+    "EntityMixin",
+    "LivingEntityMixin"
   ]
 }
