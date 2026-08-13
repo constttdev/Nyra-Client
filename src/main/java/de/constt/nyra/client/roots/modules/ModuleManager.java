@@ -113,7 +113,7 @@ public class ModuleManager {
         // MODULES.add(new AntiVoidModule());
         // MODULES.add(new AutoJumpModule());
         // MODULES.add(new AutoSneakModule());
-        // MODULES.add(new AutoSprintModule());
+        // MODULES.add(new SprintModule());
         // MODULES.add(new AutoWalkModule());
         // MODULES.add(new BoatFlyModule());
         // MODULES.add(new ClickTPModule());
