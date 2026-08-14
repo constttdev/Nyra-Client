@@ -1,6 +1,8 @@
 package de.constt.nyra.client.events;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import de.constt.nyra.client.clientcommands.CCommandManager;
+import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.utils.ModuleCacheUtils;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
@@ -28,6 +30,11 @@ public class ClientTickEventsEvent {
                     e.printStackTrace();
                 }
             }
+
+            ModuleManager.getModules().forEach(module -> {
+                if (module.getEnabledStatus())
+                    module.postTick();
+            });
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -36,6 +43,22 @@ public class ClientTickEventsEvent {
                 loaded = true;
             }
         });
+
+        ClientTickEvents.START_CLIENT_TICK.register(c ->
+                ModuleManager.getModules().forEach(module -> {
+                    if (module.getEnabledStatus())
+                        module.tick();
+                })
+        );
+
+        ClientTickEvents.START_CLIENT_TICK.register(c ->
+                CCommandManager.getCommands().forEach(command -> {
+                    if (command.getEnabledStatus()) {
+                        command.tick();
+                    }
+                })
+        );
+
     }
 
     // TODO: Add version changes via stonecutter if needed

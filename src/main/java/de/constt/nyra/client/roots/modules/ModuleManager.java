@@ -42,6 +42,7 @@ public class ModuleManager {
 
         // -- RENDER --
         MODULES.add(new ESPModule());
+        MODULES.add(new StorageESPModule());
 
         // -- WORLD --
 
