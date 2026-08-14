@@ -38,15 +38,12 @@ repositories {
 }
 
 dependencies {
-    fun fapi(vararg modules: String) {
-        for (it in modules) modImplementation(fabricApi.module(it, sc.properties["deps.fabric_api"]))
-    }
-
     minecraft("com.mojang:minecraft:${sc.current.version}")
     loomx.applyMojangMappings()
 
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
-    fapi("fabric-lifecycle-events-v1", "fabric-resource-loader-v0", "fabric-content-registries-v0", "fabric-registry-sync-v0", "fabric-message-api-v1", "fabric-rendering-v1")
+    val fabricApiVersion = sc.properties.raw("deps", "fabric_api").toString()
+    modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricApiVersion")
 
     fun includeImplementation(
         notation: String,
@@ -58,16 +55,13 @@ dependencies {
         add("include", dep)
     }
 
-    // Discord IPC
     val discordIpc = files(rootProject.file("lib/DiscordIPC-0.10.2.jar"))
     implementation(discordIpc)
 
-    // Junixsocket
     includeImplementation("com.kohlschutter.junixsocket:junixsocket-common:2.10.1")
     includeImplementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.10.1")
     includeImplementation("com.kohlschutter.junixsocket:junixsocket-core:2.10.1")
 
-    // IMGUI
     include("foundry.imguimc:imguimc-fabric-${sc.properties.rawOrNull("mod", "imgui_mc_version")}:${sc.properties.rawOrNull("mod", "imgui_version")}")
     modImplementation("foundry.imguimc:imguimc-fabric-${sc.properties.rawOrNull("mod", "imgui_mc_version")}:${sc.properties.rawOrNull("mod", "imgui_version")}")
 }
