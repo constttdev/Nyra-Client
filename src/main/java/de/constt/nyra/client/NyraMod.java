@@ -1,17 +1,15 @@
 package de.constt.nyra.client;
 
-import com.jagrosh.discordipc.IPCClient;
 import de.constt.nyra.client.clientcommands.CCommandManager;
-import de.constt.nyra.client.discordRpc.DiscordIPCCore;
-import de.constt.nyra.client.libs.render.CustomRenderingPipeline;
+import de.constt.nyra.client.libs.render.RenderingLibrary;
 import de.constt.nyra.client.managers.EventManager;
 import de.constt.nyra.client.payloads.PayloadManager;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.utils.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -40,7 +38,7 @@ public class NyraMod implements ClientModInitializer {
         ModuleManager.init();
 
         // -- Rendering --
-        CustomRenderingPipeline.register();
+        RenderingLibrary.register();
 
         // -- Commands --
         CCommandManager.init();
@@ -51,6 +49,15 @@ public class NyraMod implements ClientModInitializer {
         String title = "Nyra | CL V. " + VERSION + " | MC V. " + MINECRAFT + " | #" + InstanceUtils.getInstanceId();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> client.getWindow().setTitle(title));
+
+        // RENDER TESTS
+        /* Draw Speed in HUD for testing no slow
+        HudElementRegistry.attachElementBefore(
+                VanillaHudElements.CROSSHAIR,
+                Identifier.fromNamespaceAndPath(VarUtils.getModID(), "speed"),
+                RenderingLibrary::drawText
+        );
+        */
     }
 
     /**

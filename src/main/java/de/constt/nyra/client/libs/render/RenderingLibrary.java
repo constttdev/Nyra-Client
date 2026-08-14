@@ -12,15 +12,17 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import de.constt.nyra.client.utils.VarUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext;
-import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.StagedVertexBuffer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
@@ -33,7 +35,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.OptionalDouble;
 
-public class CustomRenderingPipeline {
+public class RenderingLibrary {
 
     private static final RenderPipeline FILLED_THROUGH_WALLS = RenderPipelines.register(
             RenderPipeline.builder(RenderPipelines.DEBUG_FILLED_SNIPPET)
@@ -46,6 +48,27 @@ public class CustomRenderingPipeline {
     );
 
     private static final List<RenderBox> renderState = new ArrayList<>();
+
+    public static void drawText(GuiGraphicsExtractor guiGraphicsExtractor, DeltaTracker deltaTracker) {
+        Minecraft minecraft = Minecraft.getInstance();
+
+        if (minecraft.player == null) {
+            return;
+        }
+
+        double x = minecraft.player.getDeltaMovement().x;
+        double z = minecraft.player.getDeltaMovement().z;
+        double speed = Math.sqrt(x * x + z * z) * 20.0;
+
+        guiGraphicsExtractor.text(
+                minecraft.font,
+                String.format("Speed: %.2f b/s", speed),
+                10,
+                10,
+                0xFFFFFFFF,
+                true
+        );
+    }
 
     private record RenderBox(
             double x,
@@ -297,6 +320,6 @@ public class CustomRenderingPipeline {
     }
 
     public static void register() {
-        LevelRenderEvents.END_MAIN.register(CustomRenderingPipeline::renderAndDraw);
+        LevelRenderEvents.END_MAIN.register(RenderingLibrary::renderAndDraw);
     }
 }

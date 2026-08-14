@@ -1,7 +1,7 @@
 package de.constt.nyra.client.roots.modules.render;
 
 import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
-import de.constt.nyra.client.libs.render.CustomRenderingPipeline;
+import de.constt.nyra.client.libs.render.RenderingLibrary;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.settings.ColorSettingImplementation;
@@ -53,7 +53,7 @@ public class ESPModule extends ModuleImplementation {
                 continue;
             }
 
-            CustomRenderingPipeline.addEntity(
+            RenderingLibrary.addEntity(
                     entity,
                     rgba[0],
                     rgba[1],
