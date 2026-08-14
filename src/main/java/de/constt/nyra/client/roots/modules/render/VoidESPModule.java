@@ -1,9 +1,0 @@
-package de.constt.nyra.client.roots.modules.render;
-import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
-import de.constt.nyra.client.roots.implementations.CategoryImplementation;
-import de.constt.nyra.client.roots.implementations.ModuleImplementation;
-
-
-@ModuleInfoAnnotation(name = "Void ESP", description = "Displays void esp information on screen.", category = CategoryImplementation.Categories.RENDER, internalModuleName = "voidesp")
-public class VoidESPModule extends ModuleImplementation {
-}
