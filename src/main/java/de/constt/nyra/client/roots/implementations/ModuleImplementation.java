@@ -1,6 +1,9 @@
 package de.constt.nyra.client.roots.implementations;
 
 import de.constt.nyra.client.roots.implementations.settings.BooleanSettingImplementation;
+import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.roots.modules.misc.DebuggerModule;
+import de.constt.nyra.client.utils.MessageUtils;
 import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import de.constt.nyra.client.utils.ModuleCacheUtils;
 import net.minecraft.network.protocol.Packet;
@@ -9,6 +12,7 @@ import org.lwjgl.glfw.GLFW;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class ModuleImplementation {
 
@@ -61,6 +65,22 @@ public abstract class ModuleImplementation {
         enabled = true;
         onEnable();
         ModuleCacheUtils.saveModule(this);
+
+        String status = this.getEnabledStatus() ? "on" : "off";
+        String statusColorCoded;
+        if(status.equals("on")) {
+            statusColorCoded = "§aon";
+        } else {
+            statusColorCoded = "§coff";
+        }
+
+
+
+        if(ModuleManager.isEnabled(DebuggerModule.class)) {
+            if((boolean) Objects.requireNonNull(ModuleManager.getModule(DebuggerModule.class)).getSetting("Log Module Status").get()) {
+                MessageUtils.sendCSMessageNeutral("§8Toggled§r "+ ModuleAnnotationUtils.getName(this.getClass()) + " (" + statusColorCoded + ")");
+            }
+        }
     }
 
     public int getKeybindingCode() {

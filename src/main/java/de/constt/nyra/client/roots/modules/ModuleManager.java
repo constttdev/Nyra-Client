@@ -4,15 +4,13 @@ import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.modules.combat.*;
-import de.constt.nyra.client.roots.modules.exploits.AutoBookBanSetupModule;
-import de.constt.nyra.client.roots.modules.exploits.BlockedServerBypassModule;
 import de.constt.nyra.client.roots.modules.exploits.BypasserModule;
 import de.constt.nyra.client.roots.modules.misc.*;
+import de.constt.nyra.client.roots.modules.render.ArrayListModule;
 import de.constt.nyra.client.roots.modules.movement.*;
 import de.constt.nyra.client.roots.modules.player.*;
 import de.constt.nyra.client.roots.modules.render.*;
 import de.constt.nyra.client.roots.modules.world.*;
-import de.constt.nyra.client.utils.ModuleCacheUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +32,7 @@ public class ModuleManager {
         // -- MISC --
         MODULES.add(new ClickGUIModule());
         MODULES.add(new PearlThrowModule());
+        MODULES.add(new DebuggerModule());
 
         // -- MOVEMENT --
         MODULES.add(new NoSlowModule());
@@ -43,6 +42,7 @@ public class ModuleManager {
         // -- RENDER --
         MODULES.add(new ESPModule());
         MODULES.add(new StorageESPModule());
+        MODULES.add(new ArrayListModule());
 
         // -- WORLD --
 
@@ -89,10 +89,8 @@ public class ModuleManager {
             Class<? extends ModuleImplementation> moduleClass
     ) {
         var module = getModule(moduleClass);
-
-        if (module != null) {
-            module.toggle();
-        }
+        assert module != null;
+        module.toggle();
     }
 
     public static CategoryImplementation.Categories getCategory(
