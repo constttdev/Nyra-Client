@@ -228,6 +228,6 @@ Heres a list of what features are done / still need work
 - [X] Bind CCommand
 - [X] Unbind CCommand
 - [ ] Internal Rendering Library (Rendering Library / Helper Functions inside this project)
-- [ ] Toggle Command
-- [ ] Friends Command (To add friends from chat without going into the GUI)
+- [X] Toggle Command
+- [X] Friends Command (To add friends from chat without going into the GUI)
 - [ ] Maybe middle click friends or smth like that 
