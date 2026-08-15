@@ -4,11 +4,11 @@ import de.constt.nyra.client.clientcommands.CCommandManager;
 import de.constt.nyra.client.libs.render.RenderingLibrary;
 import de.constt.nyra.client.managers.EventManager;
 import de.constt.nyra.client.payloads.PayloadManager;
+import de.constt.nyra.client.registries.HudElementRegistry;
 import de.constt.nyra.client.roots.modules.ModuleManager;
 import de.constt.nyra.client.utils.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -50,14 +50,8 @@ public class NyraMod implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> client.getWindow().setTitle(title));
 
-        // RENDER TESTS
-        /* Draw Speed in HUD for testing no slow
-        HudElementRegistry.attachElementBefore(
-                VanillaHudElements.CROSSHAIR,
-                Identifier.fromNamespaceAndPath(VarUtils.getModID(), "speed"),
-                RenderingLibrary::drawText
-        );
-        */
+        // Array List
+        HudElementRegistry.register();
     }
 
     /**

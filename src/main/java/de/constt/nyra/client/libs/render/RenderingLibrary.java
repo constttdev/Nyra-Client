@@ -10,6 +10,11 @@ import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import de.constt.nyra.client.roots.implementations.ModuleImplementation;
+import de.constt.nyra.client.roots.modules.ModuleManager;
+import de.constt.nyra.client.roots.modules.render.ArrayListModule;
+import de.constt.nyra.client.utils.KeybindingUtils;
+import de.constt.nyra.client.utils.ModuleAnnotationUtils;
 import de.constt.nyra.client.utils.VarUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelExtractionContext;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext;
@@ -22,7 +27,6 @@ import net.minecraft.client.renderer.StagedVertexBuffer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
@@ -30,10 +34,7 @@ import org.joml.Matrix4fc;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalDouble;
+import java.util.*;
 
 public class RenderingLibrary {
 
@@ -49,23 +50,19 @@ public class RenderingLibrary {
 
     private static final List<RenderBox> renderState = new ArrayList<>();
 
-    public static void drawText(GuiGraphicsExtractor guiGraphicsExtractor, DeltaTracker deltaTracker) {
+    public static void drawText(GuiGraphicsExtractor guiGraphicsExtractor, DeltaTracker deltaTracker, Integer color, int x, int y, String text) {
         Minecraft minecraft = Minecraft.getInstance();
 
         if (minecraft.player == null) {
             return;
         }
 
-        double x = minecraft.player.getDeltaMovement().x;
-        double z = minecraft.player.getDeltaMovement().z;
-        double speed = Math.sqrt(x * x + z * z) * 20.0;
-
         guiGraphicsExtractor.text(
                 minecraft.font,
-                String.format("Speed: %.2f b/s", speed),
-                10,
-                10,
-                0xFFFFFFFF,
+                String.format(text),
+                x,
+                y,
+                color,
                 true
         );
     }
@@ -80,7 +77,8 @@ public class RenderingLibrary {
             float r,
             float g,
             float b,
-            float a
+            float a,
+            boolean outline
     ) {
     }
 
@@ -110,7 +108,35 @@ public class RenderingLibrary {
                 r,
                 g,
                 b,
-                a
+                a,
+                false
+        ));
+    }
+
+    public static void addBoxOutline(
+            double x,
+            double y,
+            double z,
+            double width,
+            double height,
+            double depth,
+            float r,
+            float g,
+            float b,
+            float a
+    ) {
+        renderState.add(new RenderBox(
+                x,
+                y,
+                z,
+                width,
+                height,
+                depth,
+                r,
+                g,
+                b,
+                a,
+                true
         ));
     }
 
@@ -193,23 +219,111 @@ public class RenderingLibrary {
         VertexConsumer builder = stagedBuffer.getVertexBuilder(draw);
 
         for (RenderBox box : renderState) {
-            renderFilledBox(
-                    matrices.last().pose(),
-                    builder,
-                    (float) box.x(),
-                    (float) box.y(),
-                    (float) box.z(),
-                    (float) (box.x() + box.width()),
-                    (float) (box.y() + box.height()),
-                    (float) (box.z() + box.depth()),
-                    box.r(),
-                    box.g(),
-                    box.b(),
-                    box.a()
-            );
+            if (box.outline()) {
+                renderOutlineBox(
+                        matrices.last().pose(),
+                        builder,
+                        (float) box.x(),
+                        (float) box.y(),
+                        (float) box.z(),
+                        (float) (box.x() + box.width()),
+                        (float) (box.y() + box.height()),
+                        (float) (box.z() + box.depth()),
+                        box.r(),
+                        box.g(),
+                        box.b(),
+                        box.a()
+                );
+            } else {
+                renderFilledBox(
+                        matrices.last().pose(),
+                        builder,
+                        (float) box.x(),
+                        (float) box.y(),
+                        (float) box.z(),
+                        (float) (box.x() + box.width()),
+                        (float) (box.y() + box.height()),
+                        (float) (box.z() + box.depth()),
+                        box.r(),
+                        box.g(),
+                        box.b(),
+                        box.a()
+                );
+            }
         }
 
         matrices.popPose();
+    }
+
+    private static void renderOutlineBox(
+            Matrix4fc positionMatrix,
+            VertexConsumer buffer,
+            float minX,
+            float minY,
+            float minZ,
+            float maxX,
+            float maxY,
+            float maxZ,
+            float red,
+            float green,
+            float blue,
+            float alpha
+    ) {
+        float thickness = 0.02f;
+
+        renderLine(buffer, positionMatrix, minX, minY, minZ, maxX, minY, minZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, maxX, minY, minZ, maxX, minY, maxZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, maxX, minY, maxZ, minX, minY, maxZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, minX, minY, maxZ, minX, minY, minZ, thickness, red, green, blue, alpha);
+
+        renderLine(buffer, positionMatrix, minX, maxY, minZ, maxX, maxY, minZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, maxX, maxY, minZ, maxX, maxY, maxZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, maxX, maxY, maxZ, minX, maxY, maxZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, minX, maxY, maxZ, minX, maxY, minZ, thickness, red, green, blue, alpha);
+
+        renderLine(buffer, positionMatrix, minX, minY, minZ, minX, maxY, minZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, maxX, minY, minZ, maxX, maxY, minZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, maxX, minY, maxZ, maxX, maxY, maxZ, thickness, red, green, blue, alpha);
+        renderLine(buffer, positionMatrix, minX, minY, maxZ, minX, maxY, maxZ, thickness, red, green, blue, alpha);
+    }
+
+    private static void renderLine(
+            VertexConsumer buffer,
+            Matrix4fc positionMatrix,
+            float x1,
+            float y1,
+            float z1,
+            float x2,
+            float y2,
+            float z2,
+            float thickness,
+            float red,
+            float green,
+            float blue,
+            float alpha
+    ) {
+        float minX = Math.min(x1, x2) - thickness;
+        float minY = Math.min(y1, y2) - thickness;
+        float minZ = Math.min(z1, z2) - thickness;
+
+        float maxX = Math.max(x1, x2) + thickness;
+        float maxY = Math.max(y1, y2) + thickness;
+        float maxZ = Math.max(z1, z2) + thickness;
+
+        renderFilledBox(
+                positionMatrix,
+                buffer,
+                minX,
+                minY,
+                minZ,
+                maxX,
+                maxY,
+                maxZ,
+                red,
+                green,
+                blue,
+                alpha
+        );
     }
 
     private static void renderFilledBox(
@@ -314,6 +428,49 @@ public class RenderingLibrary {
             );
         }
     }
+
+    public static void drawModulesList(GuiGraphicsExtractor guiGraphicsExtractor, DeltaTracker deltaTracker) {
+        ModuleImplementation arrayListModule = ModuleManager.getModule(ArrayListModule.class);
+
+        if (arrayListModule == null || !arrayListModule.getEnabledStatus()) {
+            return;
+        }
+
+        int yOffset = (int) arrayListModule.getSetting("Module Text Offset").get();
+        int textColor = (int) arrayListModule.getSetting("Text Color").get();
+        boolean showBind = (boolean) arrayListModule.getSetting("Show Bind").get();
+
+        int screenWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+
+        for (ModuleImplementation module : ModuleManager.getModules()) {
+            String moduleName = ModuleAnnotationUtils.getName(module.getClass());
+
+            if (!Objects.equals(moduleName, "Array List") && module.getEnabledStatus()) {
+                String moduleString = moduleName;
+
+                if (showBind) {
+                    moduleString += " ["
+                            + KeybindingUtils.getKeyName(
+                            module.getKeybindingCode(),
+                            true
+                    )
+                            + "]";
+                }
+
+                drawText(
+                        guiGraphicsExtractor,
+                        deltaTracker,
+                        textColor,
+                        screenWidth - Minecraft.getInstance().font.width(moduleString) - 5,
+                        yOffset,
+                        moduleString
+                );
+
+                yOffset += 10;
+            }
+        }
+    }
+
 
     public static void close() {
         stagedBuffer.close();
