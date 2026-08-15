@@ -1,9 +1,17 @@
 package de.constt.nyra.client.utils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +21,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import de.constt.nyra.client.utils.PlayerUtils;
 
 public class FriendUtils {
 
@@ -244,5 +251,35 @@ public class FriendUtils {
         }
 
         return uuid.toString().substring(0, 8) + "…";
+    }
+
+    public static UUID getUUIDfromName(String username) {
+        try {
+            URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + URLEncoder.encode(username, StandardCharsets.UTF_8));
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+
+            if (connection.getResponseCode() != 200) {
+                return null;
+            }
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                String response = reader.readLine();
+
+                JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+                String uuid = json.get("id").getAsString();
+
+                return UUID.fromString(
+                        uuid.replaceFirst(
+                                "(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})",
+                                "$1-$2-$3-$4-$5"
+                        )
+                );
+            }
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
