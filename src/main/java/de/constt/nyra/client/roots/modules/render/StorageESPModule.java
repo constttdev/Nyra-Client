@@ -4,6 +4,7 @@ import de.constt.nyra.client.annotations.ModuleInfoAnnotation;
 import de.constt.nyra.client.libs.render.RenderingLibrary;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
+import de.constt.nyra.client.roots.implementations.settings.BooleanSettingImplementation;
 import de.constt.nyra.client.roots.implementations.settings.ColorSettingImplementation;
 import de.constt.nyra.client.roots.implementations.settings.SelectSettingImplementation;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents;
@@ -31,18 +32,21 @@ public class StorageESPModule extends ModuleImplementation {
     private final ColorSettingImplementation trappedChestBlockColor;
     private final SelectSettingImplementation storageBlocks;
 
+    private final BooleanSettingImplementation drawOutline;
+
     private final Minecraft mc = Minecraft.getInstance();
     private final List<FoundStorage> foundBlocks = new ArrayList<>();
 
     private int scanTicks;
 
     public StorageESPModule() {
-        chestBlockColor = new ColorSettingImplementation("Chest Color", 0x99FFCD00);
-        furnaceBlockColor = new ColorSettingImplementation("Furnace Color", 0x99000000);
-        barrelBlockColor = new ColorSettingImplementation("Barrel Color", 0x99FF7D00);
-        shulkerBlockColor = new ColorSettingImplementation("Shulker Box Color", 0x990042FF);
-        enderchestBlockColor = new ColorSettingImplementation("Ender Chest Color", 0x997200FF);
-        trappedChestBlockColor = new ColorSettingImplementation("Trapped Chest Color", 0x99FF0000);
+        chestBlockColor = new ColorSettingImplementation("Chest Color", 0x26FFCD00);
+        furnaceBlockColor = new ColorSettingImplementation("Furnace Color", 0x26000000);
+        barrelBlockColor = new ColorSettingImplementation("Barrel Color", 0x26FF7D00);
+        shulkerBlockColor = new ColorSettingImplementation("Shulker Box Color", 0x260042FF);
+        enderchestBlockColor = new ColorSettingImplementation("Ender Chest Color", 0x267200FF);
+        trappedChestBlockColor = new ColorSettingImplementation("Trapped Chest Color", 0x26FF0000);
+        drawOutline = new BooleanSettingImplementation("Draw Outline", false);
 
         storageBlocks = new SelectSettingImplementation(
                 "Storage",
@@ -68,6 +72,7 @@ public class StorageESPModule extends ModuleImplementation {
         registerSetting(enderchestBlockColor);
         registerSetting(trappedChestBlockColor);
         registerSetting(storageBlocks);
+        registerSetting(drawOutline);
 
         LevelRenderEvents.END_MAIN.register(context -> render());
     }
@@ -85,7 +90,7 @@ public class StorageESPModule extends ModuleImplementation {
             return;
         }
 
-        if (++scanTicks < 10) {
+        if (++scanTicks < 1) {
             return;
         }
 
@@ -193,6 +198,21 @@ public class StorageESPModule extends ModuleImplementation {
                     rgba[2],
                     rgba[3]
             );
+
+            if(drawOutline.get()) {
+                RenderingLibrary.addBoxOutline(
+                        pos.getX(),
+                        pos.getY(),
+                        pos.getZ(),
+                        1.0,
+                        1.0,
+                        1.0,
+                        rgba[0],
+                        rgba[1],
+                        rgba[2],
+                        rgba[3]
+                );
+            }
         }
     }
 
