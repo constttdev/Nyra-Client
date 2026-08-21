@@ -43,6 +43,7 @@ public class ModuleManager {
         MODULES.add(new ESPModule());
         MODULES.add(new StorageESPModule());
         MODULES.add(new ArrayListModule());
+        MODULES.add(new HandViewModule());
 
         // -- WORLD --
 

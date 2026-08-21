@@ -3,6 +3,7 @@ package de.constt.nyra.client.screens;
 import de.constt.nyra.client.panels.ClickGUIPanel;
 import de.constt.nyra.client.panels.FriendsPanel;
 import de.constt.nyra.client.roots.implementations.CategoryImplementation;
+import de.constt.nyra.client.roots.implementations.GuiAssetImplementation;
 import de.constt.nyra.client.roots.implementations.ModuleImplementation;
 import de.constt.nyra.client.roots.implementations.SettingImplementation;
 import de.constt.nyra.client.roots.modules.ModuleManager;
@@ -95,7 +96,6 @@ public class ClickGUIScreen extends BaseScreen {
 
         int categories = CategoryImplementation.Categories.values().length;
 
-        // Tighter spacing between category windows.
         float spacing = 10;
 
         float width = Math.max(
@@ -108,7 +108,6 @@ public class ClickGUIScreen extends BaseScreen {
         int index = 0;
 
         if (listeningModule != null) {
-            //~ if <1.21.9 '.getWindow().handle()' -> '.getWindow().getWindow()'
             long window = Minecraft.getInstance().getWindow().handle();
 
             for (
@@ -122,7 +121,9 @@ public class ClickGUIScreen extends BaseScreen {
                         listeningModule.keyBindingCode =
                                 GLFW.GLFW_KEY_UNKNOWN;
 
-                        ConfigManagerUtils.removeKeybind(listeningModule);
+                        ConfigManagerUtils.removeKeybind(
+                                listeningModule
+                        );
                     } else {
                         listeningModule.keyBindingCode = key;
 
@@ -142,7 +143,6 @@ public class ClickGUIScreen extends BaseScreen {
                 CategoryImplementation.Categories category :
                 CategoryImplementation.Categories.values()
         ) {
-
             renderWindowPosition(
                     category.name(),
                     spacing + index * (width + spacing),
@@ -151,9 +151,6 @@ public class ClickGUIScreen extends BaseScreen {
                     height
             );
 
-            /*
-             * Compact Future/Meteor-style window padding.
-             */
             ImGui.pushStyleVar(
                     ImGuiStyleVar.WindowPadding,
                     7,
@@ -178,7 +175,7 @@ public class ClickGUIScreen extends BaseScreen {
             )) {
 
                 ImGui.beginChild(
-                        category.name() + "_content",
+                        category.name() + "##content",
                         0,
                         0,
                         false
@@ -188,7 +185,6 @@ public class ClickGUIScreen extends BaseScreen {
                         ModuleImplementation module :
                         ModuleManager.getModules()
                 ) {
-
                     if (
                             ModuleManager.getCategory(module.getClass())
                                     != category
@@ -216,7 +212,6 @@ public class ClickGUIScreen extends BaseScreen {
         }
 
         for (ClickGUIPanel panel : panels) {
-
             renderWindowPosition(
                     panel.getName(),
                     spacing + index * (width + spacing),
@@ -242,6 +237,7 @@ public class ClickGUIScreen extends BaseScreen {
     }
 
     private void drawModule(ModuleImplementation module) {
+        ImGui.pushID(module.getTranslatableText());
 
         boolean expanded = expandedModules.contains(module);
 
@@ -251,17 +247,13 @@ public class ClickGUIScreen extends BaseScreen {
             label += " [ON]";
         }
 
-        /*
-         * Compact module row.
-         *
-         * 24px is much closer to the dense
-         * Future/Meteor ClickGUI style than 32px.
-         */
         float bindWidth = 48;
         float spacing = 3;
 
         float moduleWidth =
-                ImGui.getContentRegionAvailX() - bindWidth - spacing;
+                ImGui.getContentRegionAvailX() -
+                        bindWidth -
+                        spacing;
 
         boolean moduleClicked = ImGui.button(
                 label,
@@ -269,18 +261,12 @@ public class ClickGUIScreen extends BaseScreen {
                 24
         );
 
-        /*
-         * Right click expands settings.
-         * Left click toggles the module.
-         */
         if (ImGui.isItemClicked(1)) {
-
             if (expanded) {
                 expandedModules.remove(module);
             } else {
                 expandedModules.add(module);
             }
-
         } else if (moduleClicked) {
             module.toggle();
         }
@@ -311,14 +297,13 @@ public class ClickGUIScreen extends BaseScreen {
                 ? "..."
                 : getBindLabel(module);
 
-        if (
-                ImGui.button(
-                        bindText + "##bind_" +
-                                module.getTranslatableText(),
-                        bindWidth,
-                        24
-                )
-        ) {
+        ImGui.button(
+                bindText + "##bind",
+                bindWidth,
+                24
+        );
+
+        if (ImGui.isItemClicked()) {
             listeningModule =
                     isListening ? null : module;
         }
@@ -327,11 +312,7 @@ public class ClickGUIScreen extends BaseScreen {
             ImGui.popStyleColor(2);
         }
 
-        /*
-         * Expanded settings.
-         */
         if (expanded) {
-
             ImGui.pushStyleVar(
                     ImGuiStyleVar.ChildRounding,
                     1
@@ -350,11 +331,13 @@ public class ClickGUIScreen extends BaseScreen {
             );
 
             ImGui.beginChild(
-                    module.getTranslatableText() + "_settings",
+                    "settings",
                     0,
                     calculateSettingsHeight(module),
                     true
             );
+
+            ImGui.pushID("description");
 
             ImGui.text(
                     ModuleAnnotationUtils.getDescription(
@@ -362,11 +345,20 @@ public class ClickGUIScreen extends BaseScreen {
                     )
             );
 
-            for (
-                    SettingImplementation<?> setting :
-                    module.getSettings()
-            ) {
-                setting.renderImGui();
+            ImGui.popID();
+
+            int elementIndex = 0;
+
+            for (Object element : module.getGuiElements()) {
+                ImGui.pushID(elementIndex++);
+
+                if (element instanceof SettingImplementation<?> setting) {
+                    setting.renderImGui();
+                } else if (element instanceof GuiAssetImplementation<?> asset) {
+                    asset.renderImGui();
+                }
+
+                ImGui.popID();
             }
 
             module.renderCustomSettings();
@@ -376,30 +368,20 @@ public class ClickGUIScreen extends BaseScreen {
             ImGui.popStyleVar(3);
         }
 
-        /*
-         * Small gap between module rows.
-         * Avoid ImGui.spacing(), which is much larger.
-         */
         ImGui.dummy(0, 2);
+
+        ImGui.popID();
     }
 
     private float calculateSettingsHeight(
             ModuleImplementation module
     ) {
-        /*
-         * Compact settings sizing.
-         *
-         * Previously:
-         * 45 + settings * 45
-         *
-         * Now:
-         * 34 + settings * 32
-         */
         float height = 34;
 
         height += module.getSettings().size() * 32;
+        height += module.getGuiAssets().size() * 24;
 
-        return Math.min(height, 260);
+        return height;
     }
 
     private static String getBindLabel(
