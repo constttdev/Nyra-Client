@@ -58,9 +58,9 @@ dependencies {
     val discordIpc = files(rootProject.file("lib/DiscordIPC-0.10.2.jar"))
     implementation(discordIpc)
 
-    includeImplementation("com.kohlschutter.junixsocket:junixsocket-common:2.10.1")
-    includeImplementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.10.1")
-    includeImplementation("com.kohlschutter.junixsocket:junixsocket-core:2.10.1")
+    includeImplementation("com.kohlschutter.junixsocket:junixsocket-common:2.11.1")
+    includeImplementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.11.1")
+    includeImplementation("com.kohlschutter.junixsocket:junixsocket-core:2.11.1")
 
     include("foundry.imguimc:imguimc-fabric-${sc.properties.rawOrNull("mod", "imgui_mc_version")}:${sc.properties.rawOrNull("mod", "imgui_version")}")
     modImplementation("foundry.imguimc:imguimc-fabric-${sc.properties.rawOrNull("mod", "imgui_mc_version")}:${sc.properties.rawOrNull("mod", "imgui_version")}")
